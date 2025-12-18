@@ -6,7 +6,7 @@ export const Hero: React.FC = () => {
     return (
         <section className="container mx-auto px-4 py-20 md:py-32 text-center">
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
-                Transformamos Eventos<br />em <span className="bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">Experiências Memoráveis</span>
+                Transformamos Eventos<br />em <span className="bg-gradient from-white to-white/60 bg-clip-text text-transparent">Experiências Memoráveis</span>
             </h1>
             <p className="text-xl text-white/70 mb-10 max-w-3xl mx-auto">
                 Sonorização, iluminação e estrutura completa para formaturas, solenidades, bailes, festas e eventos de todos os tipos

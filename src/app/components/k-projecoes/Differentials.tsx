@@ -14,7 +14,7 @@ export const Differentials: React.FC<DifferentialsProps> = ({ differentials }) =
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {differentials.map((item, index) => (
                         <div key={index} className="flex items-start gap-3">
-                            <CheckCircle className="text-white mt-1 flex-shrink-0" size={20} />
+                            <CheckCircle className="text-white mt-1 " size={20} />
                             <span className="text-lg">{item}</span>
                         </div>
                     ))}
