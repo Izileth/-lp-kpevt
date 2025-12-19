@@ -6,7 +6,7 @@ import { PhoneIcon, MailIcon, MapPinIcon, WhatsAppIcon } from './Icons';
 export const ContactInfo: React.FC = () => {
     return (
         <div className="space-y-6">
-            <div className="bg-white/5 border border-white/10 rounded-lg p-6">
+            <div className="bg-black border border-white/10 rounded-lg p-6">
                 <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center ">
                         <PhoneIcon />

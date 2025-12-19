@@ -18,7 +18,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ testimonials }) => {
                 {testimonials.map((testimonial, index) => (
                     <div
                         key={index}
-                        className="bg-white/5 border border-white/10 rounded-lg p-8"
+                        className="bg-black border border-white/10 rounded-lg p-8"
                     >
                         <div className="flex gap-1 mb-4">
                             {[...Array(5)].map((_, i) => (

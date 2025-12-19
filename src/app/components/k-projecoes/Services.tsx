@@ -21,7 +21,7 @@ export const Services: React.FC<ServicesProps> = ({ services }) => {
                     return (
                         <div
                             key={index}
-                            className="bg-white/5 border border-white/10 rounded-lg p-8 hover:border-white/30 transition group"
+                            className="bg-black border border-white/10 rounded-lg p-8 hover:border-white/30 transition group"
                         >
                             <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-white/20 transition">
                                 <IconComponent />

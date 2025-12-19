@@ -24,7 +24,7 @@ export const ContactForm: React.FC = () => {
     };
 
     return (
-        <div className="bg-white/5 border border-white/10 rounded-lg p-8">
+        <div className="bg-black border border-white/10 rounded-lg p-8">
             <form onSubmit={handleFormSubmit} className="space-y-6">
                 <div>
                     <label htmlFor="name" className="block text-sm font-semibold mb-2">Nome Completo</label>
