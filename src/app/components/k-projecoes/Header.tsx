@@ -119,13 +119,7 @@ export const Header: React.FC = () => {
                             exit="exit"
                             className="fixed top-0 right-0 bottom-0 w-[85%] max-w-sm bg-black border-l border-white/10 z-50 md:hidden overflow-y-auto"
                         >
-                            {/* Header do Menu com Logo */}
-                            <div className="border-b border-white/10 px-6 py-4">
-                                <div className="text-xl font-bold">
-                                    K Projeções <span className="text-white/60">& Eventos</span>
-                                </div>
-                            </div>
-
+                         =
                             {/* Navegação */}
                             <motion.nav
                                 className="px-6 py-8"

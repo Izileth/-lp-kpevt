@@ -31,7 +31,7 @@ export default function KProjecoes() {
                 <Testimonials testimonials={testimonials} />
 
                 {/* Contact Section */}
-                <AnimatedSection id="contato" className="container mx-auto px-4 py-20">
+                <AnimatedSection className="container mx-auto px-4 py-20">
                     <div className="max-w-4xl mx-auto">
                         <div className="text-center mb-12">
                             <h2 className="text-4xl md:text-5xl font-bold mb-4">Solicite seu Orçamento</h2>
