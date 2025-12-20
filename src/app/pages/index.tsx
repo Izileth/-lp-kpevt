@@ -1,4 +1,3 @@
-
 import { useAnalytics } from '../lib/analytics';
 
 import { Header } from '../components/k-projecoes/Header';
@@ -11,6 +10,7 @@ import { ContactForm } from '../components/k-projecoes/ContactForm';
 import { ContactInfo } from '../components/k-projecoes/ContactInfo';
 import { Footer } from '../components/k-projecoes/Footer';
 import { FloatingWhatsAppButton } from '../components/k-projecoes/FloatingWhatsAppButton';
+import { AnimatedSection } from '../components/k-projecoes/AnimatedSection';
 
 import { services, eventTypes, testimonials, differentials } from '../lib/data';
 
@@ -31,7 +31,7 @@ export default function KProjecoes() {
                 <Testimonials testimonials={testimonials} />
 
                 {/* Contact Section */}
-                <section id="contato" className="container mx-auto px-4 py-20">
+                <AnimatedSection id="contato" className="container mx-auto px-4 py-20">
                     <div className="max-w-4xl mx-auto">
                         <div className="text-center mb-12">
                             <h2 className="text-4xl md:text-5xl font-bold mb-4">Solicite seu Orçamento</h2>
@@ -43,7 +43,7 @@ export default function KProjecoes() {
                             <ContactInfo />
                         </div>
                     </div>
-                </section>
+                </AnimatedSection>
             </main>
 
             <Footer />

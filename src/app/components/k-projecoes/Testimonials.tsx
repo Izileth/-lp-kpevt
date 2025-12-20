@@ -1,7 +1,7 @@
-// src/app/components/k-projecoes/Testimonials.tsx
 import React, { useState, useEffect, useCallback } from 'react';
 import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { Testimonial } from '../../lib/data';
+import { AnimatedSection } from './AnimatedSection';
 
 interface TestimonialsProps {
     testimonials: Testimonial[];
@@ -84,8 +84,8 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ testimonials }) => {
     };
 
     return (
-        <section id="depoimentos" className="container w-full mx-auto px-4 py-20 overflow-hidden">
-            <div className="text-center mb-16">
+        <AnimatedSection className="container w-full mx-auto px-4 py-20 overflow-hidden">
+            <div  id="depoimentos" className="text-center mb-16">
                 <h2 className="text-4xl md:text-5xl font-bold mb-4">O que dizem nossos clientes</h2>
                 <p className="text-white/70 text-lg">Experiências reais de quem confiou em nós</p>
             </div>
@@ -197,6 +197,6 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ testimonials }) => {
                     ))}
                 </div>
             </div>
-        </section>
+        </AnimatedSection>
     );
 };

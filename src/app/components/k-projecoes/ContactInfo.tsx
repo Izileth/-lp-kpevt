@@ -1,12 +1,12 @@
-// src/app/components/k-projecoes/ContactInfo.tsx
 import React from 'react';
 import { openWhatsApp } from '../../lib/whatsapp';
 import { PhoneIcon, MailIcon, MapPinIcon, WhatsAppIcon } from './Icons';
+import { AnimatedSection } from './AnimatedSection';
 
 export const ContactInfo: React.FC = () => {
     return (
-        <div className="space-y-6">
-            <div className="bg-black border border-white/10 rounded-lg p-6">
+        <AnimatedSection className="space-y-6">
+            <div id='contato' className="bg-black border border-white/10 rounded-lg p-6">
                 <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center ">
                         <PhoneIcon />
@@ -52,6 +52,7 @@ export const ContactInfo: React.FC = () => {
                 <WhatsAppIcon />
                 Fale Conosco no WhatsApp
             </button>
-        </div>
+        </AnimatedSection>
     );
 };
+

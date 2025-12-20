@@ -1,15 +1,11 @@
-
 import React from 'react';
 import { CheckCircle } from 'lucide-react';
-
 import type { DifferentialsProps } from '../../lib/data';
-
+import { AnimatedSection } from './AnimatedSection';
 
 export const Differentials: React.FC<DifferentialsProps> = ({ differentials }) => {
-
-
     return (
-        <section className="container mx-auto px-4 py-20">
+        <AnimatedSection className="container mx-auto px-4 py-20">
             {/* Diferenciais */}
             <div className="bg-black border border-white/10 rounded-2xl p-8 md:p-12 relative overflow-hidden">
                 {/* Decorative corners */}
@@ -35,7 +31,6 @@ export const Differentials: React.FC<DifferentialsProps> = ({ differentials }) =
                     </div>
                 </div>
             </div>
-
-        </section>
+        </AnimatedSection>
     );
 };

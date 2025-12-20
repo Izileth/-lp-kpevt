@@ -1,8 +1,8 @@
-// src/app/components/k-projecoes/EventTypes.tsx
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { openWhatsApp } from '../../lib/whatsapp';
 import type { EventType } from '../../lib/data';
+import { AnimatedSection } from './AnimatedSection';
 
 interface EventTypesProps {
     eventTypes: EventType[];
@@ -10,8 +10,8 @@ interface EventTypesProps {
 
 export const EventTypes: React.FC<EventTypesProps> = ({ eventTypes }) => {
     return (
-        <section id="eventos" className="container mx-auto px-4 py-20">
-            <div className="text-center mb-16">
+        <AnimatedSection  className="container mx-auto px-4 py-20">
+            <div id="eventos" className="text-center mb-16">
                 <h2 className="text-4xl md:text-5xl font-bold mb-4">Tipos de Eventos</h2>
                 <p className="text-white/70 text-lg">Atendemos todos os tipos de celebrações</p>
             </div>
@@ -32,6 +32,7 @@ export const EventTypes: React.FC<EventTypesProps> = ({ eventTypes }) => {
                     </div>
                 ))}
             </div>
-        </section>
+        </AnimatedSection>
     );
 };
+

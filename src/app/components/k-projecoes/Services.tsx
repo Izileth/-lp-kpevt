@@ -1,8 +1,8 @@
-// src/app/components/k-projecoes/Services.tsx
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { openWhatsApp } from '../../lib/whatsapp';
 import type { Service } from '../../lib/data';
+import { AnimatedSection } from './AnimatedSection';
 
 interface ServicesProps {
     services: Service[];
@@ -10,8 +10,8 @@ interface ServicesProps {
 
 export const Services: React.FC<ServicesProps> = ({ services }) => {
     return (
-        <section id="servicos" className="container mx-auto px-4 py-20">
-            <div className="text-center mb-16">
+        <AnimatedSection  className="container mx-auto px-4 py-20">
+            <div id="servicos" className="text-center mb-16">
                 <h2 className="text-4xl md:text-5xl font-bold mb-4">Nossos Serviços</h2>
                 <p className="text-white/70 text-lg">Soluções completas para o seu evento</p>
             </div>
@@ -38,6 +38,7 @@ export const Services: React.FC<ServicesProps> = ({ services }) => {
                     );
                 })}
             </div>
-        </section>
+        </AnimatedSection>
     );
 };
+

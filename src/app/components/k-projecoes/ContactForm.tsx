@@ -1,7 +1,7 @@
-// src/app/components/k-projecoes/ContactForm.tsx
 import React from 'react';
 import { openWhatsApp } from '../../lib/whatsapp';
 import { WhatsAppIcon } from './Icons';
+import { AnimatedSection } from './AnimatedSection';
 
 export const ContactForm: React.FC = () => {
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -24,7 +24,7 @@ export const ContactForm: React.FC = () => {
     };
 
     return (
-        <div className="bg-black border border-white/10 rounded-lg p-8">
+        <AnimatedSection className="bg-black border border-white/10 rounded-lg p-8">
             <form onSubmit={handleFormSubmit} className="space-y-6">
                 <div>
                     <label htmlFor="name" className="block text-sm font-semibold mb-2">Nome Completo</label>
@@ -95,6 +95,7 @@ export const ContactForm: React.FC = () => {
                     Enviar via WhatsApp
                 </button>
             </form>
-        </div>
+        </AnimatedSection>
     );
 };
+
