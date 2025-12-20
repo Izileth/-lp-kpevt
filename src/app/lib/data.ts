@@ -43,32 +43,32 @@ export const eventTypes: EventType[] = [
     {
         title: 'Formaturas',
         description: 'Celebre essa conquista com toda pompa e circunstância',
-        image: '🎓'
+        image: '1'
     },
     {
         title: 'Solenidades',
         description: 'Eventos corporativos e cerimoniais com elegância e profissionalismo',
-        image: '🏆'
+        image: '2'
     },
     {
         title: 'Bailes e Festas',
         description: 'Diversão garantida com a melhor estrutura para sua celebração',
-        image: '🎉'
+        image: '3'
     },
     {
         title: 'Casamentos',
         description: 'Torne seu grande dia ainda mais especial e inesquecível',
-        image: '💍'
+        image: '4'
     },
     {
         title: 'Shows e Eventos',
         description: 'Estrutura completa para apresentações e grandes eventos',
-        image: '🎤'
+        image: '5'
     },
     {
         title: 'Eventos Corporativos',
         description: 'Palestras, convenções e eventos empresariais impecáveis',
-        image: '💼'
+        image: '6'
     }
 ];
 
@@ -97,4 +97,20 @@ export const differentials: string[] = [
     'Montagem e desmontagem ágil',
     'Suporte durante todo evento',
     'Orçamento sem compromisso'
+];
+
+export interface DifferentialsProps {
+    differentials: string[];
+}
+
+
+export const partners = [
+    { name: 'Parceiro 1', logo: 'P1' },
+    { name: 'Parceiro 2', logo: 'P2' },
+    { name: 'Parceiro 3', logo: 'P3' },
+    { name: 'Parceiro 4', logo: 'P4' },
+    { name: 'Parceiro 5', logo: 'P5' },
+    { name: 'Parceiro 6', logo: 'P6' },
+    { name: 'Parceiro 7', logo: 'P7' },
+    { name: 'Parceiro 8', logo: 'P8' },
 ];

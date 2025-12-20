@@ -22,7 +22,7 @@ export const EventTypes: React.FC<EventTypesProps> = ({ eventTypes }) => {
                         onClick={() => openWhatsApp(`Olá! Gostaria de orçamento para ${event.title}.`, `event_type_${event.title.toLowerCase().replace(/\s+/g, '_')}`)}
                         className="bg-black border border-white/10 rounded-lg p-8 hover:border-white/30 transition group cursor-pointer"
                     >
-                        <div className="text-5xl mb-4">{event.image}</div>
+                        <div className="text-5xl mb-4 border-l border-white/50 pl-4">{event.image}</div>
                         <h3 className="text-2xl font-bold mb-3">{event.title}</h3>
                         <p className="text-white/70 mb-4">{event.description}</p>
                         <div className="flex items-center text-white/50 group-hover:text-white transition">
