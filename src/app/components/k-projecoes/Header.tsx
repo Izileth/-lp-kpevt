@@ -4,6 +4,7 @@ import { openWhatsApp } from '../../lib/whatsapp';
 import { useScrollVisibility } from '../../hooks/useScrollVisibility';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Variants } from 'framer-motion';
+
 const navLinks = [
     { href: '#servicos', label: 'Serviços' },
     { href: '#eventos', label: 'Eventos' },

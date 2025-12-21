@@ -1,7 +1,7 @@
 // src/app/lib/whatsapp.ts
 import { trackConversion } from './analytics';
 
-const WHATSAPP_NUMBER = '5591993961874'; // Replace with your number (e.g., 5511999999999)
+const WHATSAPP_NUMBER = '5591981125595'; 
 const DEFAULT_MESSAGE = 'Olá! Gostaria de solicitar um orçamento para meu evento.';
 
 /**
