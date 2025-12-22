@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { Testimonial } from '../../lib/data';
 import { AnimatedSection } from './AnimatedSection';
-
 interface TestimonialsProps {
     testimonials: Testimonial[];
 }

@@ -3,7 +3,6 @@ import { ArrowRight } from 'lucide-react';
 import { openWhatsApp } from '../../lib/whatsapp';
 import type { EventType } from '../../lib/data';
 import { AnimatedSection } from './AnimatedSection';
-
 interface EventTypesProps {
     eventTypes: EventType[];
 }

@@ -3,7 +3,6 @@ import { ArrowRight } from 'lucide-react';
 import { openWhatsApp } from '../../lib/whatsapp';
 import type { Service } from '../../lib/data';
 import { AnimatedSection } from './AnimatedSection';
-
 interface ServicesProps {
     services: Service[];
 }

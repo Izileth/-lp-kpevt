@@ -1,16 +1,16 @@
 import { useAnalytics } from '../lib/analytics';
 
-import { Header } from '../components/k-projecoes/Header';
-import { Hero } from '../components/k-projecoes/Hero';
-import { Services } from '../components/k-projecoes/Services';
-import { EventTypes } from '../components/k-projecoes/EventTypes';
-import { Differentials } from '../components/k-projecoes/Differentials';
-import { Testimonials } from '../components/k-projecoes/Testimonials';
-import { ContactForm } from '../components/k-projecoes/ContactForm';
-import { ContactInfo } from '../components/k-projecoes/ContactInfo';
-import { Footer } from '../components/k-projecoes/Footer';
-import { FloatingWhatsAppButton } from '../components/k-projecoes/FloatingWhatsAppButton';
-import { AnimatedSection } from '../components/k-projecoes/AnimatedSection';
+import { Header } from '../components/layout/Header';
+import { Hero } from '../components/layout/Hero';
+import { Services } from '../components/ui/Services';
+import { EventTypes } from '../components/ui/EventTypes';
+import { Differentials } from '../components/ui/Differentials';
+import { Testimonials } from '../components/ui/Testimonials';
+import { ContactForm } from '../components/ui/ContactForm';
+import { ContactInfo } from '../components/ui/ContactInfo';
+import { Footer } from '../components/layout/Footer';
+import { FloatingWhatsAppButton } from '../components/ui/FloatingWhatsAppButton';
+import { AnimatedSection } from '../components/ui/AnimatedSection';
 
 import { services, eventTypes, testimonials, differentials } from '../lib/data';
 
