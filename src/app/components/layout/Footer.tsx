@@ -1,7 +1,9 @@
-// src/app/components/k-projecoes/Footer.tsx
 import React from 'react';
+import { useEmail } from '../../hooks/useEmail';
 
 export const Footer: React.FC = () => {
+    const { handleEmailClick } = useEmail();
+
     return (
         <footer className="border-t border-white/10 mt-20">
             <div className="container mx-auto px-4 py-12">
@@ -25,8 +27,19 @@ export const Footer: React.FC = () => {
                     <div>
                         <h4 className="font-semibold mb-4">Contato</h4>
                         <ul className="space-y-2 text-white/70">
-                            <li>(91) 99999-9999</li>
-                            <li>contato@kprojecoes.com.br</li>
+                            <li>(91) 98112-55595</li>
+                            <li>
+                                <a 
+                                    href="mailto:kprogecoes.oficial@gmail.com"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        handleEmailClick('kprogecoes.oficial@gmail.com', 'footer_email_click');
+                                    }}
+                                    className="hover:text-white transition"
+                                >
+                                    kprogecoes.oficial@gmail.com
+                                </a>
+                            </li>
                             <li>Ananindeua, PA</li>
                         </ul>
                     </div>

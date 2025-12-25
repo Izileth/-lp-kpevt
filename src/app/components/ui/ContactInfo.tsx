@@ -1,9 +1,12 @@
 import React from 'react';
 import { openWhatsApp } from '../../lib/whatsapp';
+import { useEmail } from '../../hooks/useEmail';
 import { PhoneIcon, MailIcon, MapPinIcon, WhatsAppIcon } from './Icons';
 import { AnimatedSection } from './AnimatedSection';
 
 export const ContactInfo: React.FC = () => {
+    const { handleEmailClick } = useEmail();
+
     return (
         <AnimatedSection className="space-y-6">
             <div id='contato' className="bg-black border border-white/10 rounded-lg p-6">
@@ -13,8 +16,8 @@ export const ContactInfo: React.FC = () => {
                     </div>
                     <div>
                         <h3 className="font-semibold mb-2">Telefone</h3>
-                        <a href="tel:+5591999999999" className="text-white/70 hover:text-white transition block">(91) 99999-9999</a>
-                        <a href="tel:+5591988888888" className="text-white/70 hover:text-white transition block">(91) 98888-8888</a>
+                        <a href="tel:+5591981125595" className="text-white/70 hover:text-white transition block">(91) 98112-5595</a>
+                        <a href="tel:+5591981158273" className="text-white/70 hover:text-white transition block">(91) 98888-8888</a>
                     </div>
                 </div>
             </div>
@@ -26,8 +29,26 @@ export const ContactInfo: React.FC = () => {
                     </div>
                     <div>
                         <h3 className="font-semibold mb-2">E-mail</h3>
-                        <a href="mailto:contato@kprojecoes.com.br" className="text-white/70 hover:text-white transition block">contato@kprojecoes.com.br</a>
-                        <a href="mailto:orcamento@kprojecoes.com.br" className="text-white/70 hover:text-white transition block">orcamento@kprojecoes.com.br</a>
+                        <a 
+                            href="mailto:kprogecoes.oficial@gmail.com" 
+                            onClick={(e) => {
+                                e.preventDefault();
+                                handleEmailClick('kprogecoes.oficial@gmail.com', 'contact_email_click');
+                            }}
+                            className="text-white/70 hover:text-white transition block"
+                        >
+                            kprogecoes.oficial@gmail.com
+                        </a>
+                        <a 
+                            href="mailto:kprogecoes.oficial@gmail.com" 
+                            onClick={(e) => {
+                                e.preventDefault();
+                                handleEmailClick('kprogecoes.oficial@gmail.com', 'orcamento_email_click');
+                            }}
+                            className="text-white/70 hover:text-white transition block"
+                        >
+                            kprogecoes.oficial@gmail.com
+                        </a>
                     </div>
                 </div>
             </div>
@@ -55,4 +76,3 @@ export const ContactInfo: React.FC = () => {
         </AnimatedSection>
     );
 };
-

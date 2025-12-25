@@ -26,26 +26,44 @@ export const Header: React.FC = () => {
     `;
 
     const sidebarVariants: Variants = {
-        hidden: { x: '100%' },
+        hidden: { 
+            clipPath: 'circle(0% at calc(100% - 56px) 28px)',
+            transition: { 
+                duration: 0.5,
+                ease: [0.32, 0.72, 0, 1]
+            }
+        },
         visible: {
-            x: 0,
+            clipPath: 'circle(150% at calc(100% - 56px) 28px)',
             transition: {
-                duration: 0.4,
-                ease: 'easeInOut',
+                duration: 0.6,
+                ease: [0.32, 0.72, 0, 1],
             },
         },
-        exit: { x: '100%', transition: { duration: 0.3, ease: 'easeInOut' } },
     };
 
-    const overlayVariants = {
-        hidden: { opacity: 0 },
-        visible: { opacity: 1, transition: { duration: 0.3 } },
-        exit: { opacity: 0, transition: { duration: 0.3 } },
+    const contentVariants: Variants = {
+        hidden: { 
+            opacity: 0,
+        },
+        visible: {
+            opacity: 1,
+            transition: {
+                delay: 0.3,
+                duration: 0.4,
+            }
+        },
+        exit: {
+            opacity: 0,
+            transition: {
+                duration: 0.2,
+            }
+        }
     };
 
     const navLinkVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0 },
+        hidden: { opacity: 0, x: -20 },
+        visible: { opacity: 1, x: 0 },
     };
 
     // Previne scroll quando menu está aberto
@@ -87,105 +105,172 @@ export const Header: React.FC = () => {
                         </button>
                     </div>
 
-                    {/* Mobile Menu Button - Sempre visível */}
+                    {/* Mobile Menu Button */}
                     <button
-                        className="md:hidden relative z-[60]"
+                        className="md:hidden relative z-[60] w-10 h-10 flex items-center justify-center"
                         onClick={() => setMenuOpen(!menuOpen)}
                         aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
                     >
-                        {menuOpen ? <X size={28} /> : <Menu size={28} />}
+                        <AnimatePresence mode="wait">
+                            {menuOpen ? (
+                                <motion.div
+                                    key="close"
+                                    initial={{ rotate: -90, opacity: 0 }}
+                                    animate={{ rotate: 0, opacity: 1 }}
+                                    exit={{ rotate: 90, opacity: 0 }}
+                                    transition={{ duration: 0.2 }}
+                                >
+                                    <X size={28} />
+                                </motion.div>
+                            ) : (
+                                <motion.div
+                                    key="menu"
+                                    initial={{ rotate: 90, opacity: 0 }}
+                                    animate={{ rotate: 0, opacity: 1 }}
+                                    exit={{ rotate: -90, opacity: 0 }}
+                                    transition={{ duration: 0.2 }}
+                                >
+                                    <Menu size={28} />
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </button>
                 </nav>
             </header>
 
-            {/* Mobile Menu Sidebar */}
+            {/* Mobile Menu Fullscreen */}
             <AnimatePresence>
                 {menuOpen && (
-                    <>
-                        {/* Overlay de fundo */}
-                        <motion.div
-                            variants={overlayVariants}
-                            initial="hidden"
-                            animate="visible"
-                            exit="exit"
-                            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-40 md:hidden"
-                            onClick={() => setMenuOpen(false)}
-                        />
+                    <motion.div
+                        variants={sidebarVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit="hidden"
+                        className="fixed inset-0 bg-black z-50 md:hidden"
+                    >
+                        {/* Header com Logo e Botão Fechar */}
+                        <div className="absolute top-0 left-0 right-0 z-[60] bg-transparent">
+                            <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+                                <motion.div 
+                                    className="text-2xl font-bold"
+                                    initial={{ opacity: 0, x: -20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: 0.4, duration: 0.3 }}
+                                >
+                                    K Projeções <span className="text-white/60">& Eventos</span>
+                                </motion.div>
 
-                        {/* Sidebar */}
+                                {/* Botão Fechar na mesma posição */}
+                                <button
+                                    className="w-10 h-10 flex items-center justify-center"
+                                    onClick={() => setMenuOpen(false)}
+                                    aria-label="Fechar menu"
+                                >
+                                    <motion.div
+                                        initial={{ rotate: -90, opacity: 0 }}
+                                        animate={{ rotate: 0, opacity: 1 }}
+                                        transition={{ delay: 0.4, duration: 0.3 }}
+                                    >
+                                        <X size={28} />
+                                    </motion.div>
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Conteúdo do Menu */}
                         <motion.div
-                            variants={sidebarVariants}
+                            variants={contentVariants}
                             initial="hidden"
                             animate="visible"
                             exit="exit"
-                            className="fixed top-0 right-0 bottom-0 w-[85%] max-w-sm bg-black border-l border-white/10 z-50 md:hidden overflow-y-auto"
+                            className="h-full flex flex-col justify-center px-8"
                         >
-                         =
-                            {/* Navegação */}
+                            {/* Navegação Principal */}
                             <motion.nav
-                                className="px-6 py-8"
                                 variants={{
-                                    visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } }
+                                    visible: { 
+                                        transition: { 
+                                            staggerChildren: 0.08,
+                                            delayChildren: 0.5
+                                        } 
+                                    }
                                 }}
                                 initial="hidden"
                                 animate="visible"
+                                className="mb-16"
                             >
-                                <ul className="space-y-6">
+                                <ul className="space-y-2">
                                     {navLinks.map((link, index) => (
-                                        <motion.li key={link.href} variants={navLinkVariants}>
+                                        <motion.li 
+                                            key={link.href} 
+                                            variants={navLinkVariants}
+                                            className="overflow-hidden"
+                                        >
                                             <a
                                                 href={link.href}
-                                                className="block text-2xl font-semibold hover:text-white/70 transition-colors py-2"
+                                                className="block text-4xl md:text-5xl font-bold hover:text-white/70 transition-colors py-3 group"
                                                 onClick={() => setMenuOpen(false)}
                                             >
-                                                <span className="text-white/40 text-sm mr-3">0{index + 1}</span>
-                                                {link.label}
+                                                <span className="text-white/30 text-base font-normal mr-4 inline-block w-8">
+                                                    0{index + 1}
+                                                </span>
+                                                <span className="inline-block group-hover:translate-x-2 transition-transform">
+                                                    {link.label}
+                                                </span>
                                             </a>
                                         </motion.li>
                                     ))}
                                 </ul>
-
-                                {/* CTA Button */}
-                                <motion.div
-                                    variants={navLinkVariants}
-                                    className="mt-10 pt-8 border-t border-white/10"
-                                >
-                                    <button
-                                        onClick={() => {
-                                            setMenuOpen(false);
-                                            handleWhatsAppClick('mobile_menu_cta');
-                                        }}
-                                        className="w-full px-6 py-4 bg-white text-black hover:bg-white/90 transition-all duration-300 rounded-lg font-semibold text-lg"
-                                    >
-                                        Solicitar Orçamento
-                                    </button>
-                                </motion.div>
-
-                                {/* Info de Contato */}
-                                <motion.div
-                                    variants={navLinkVariants}
-                                    className="mt-8 pt-8 border-t border-white/10 space-y-4"
-                                >
-                                    <div>
-                                        <p className="text-white/40 text-xs uppercase tracking-wider mb-2">Telefone</p>
-                                        <a href="tel:+5591999999999" className="text-white/90 hover:text-white transition">
-                                            (91) 99999-9999
-                                        </a>
-                                    </div>
-                                    <div>
-                                        <p className="text-white/40 text-xs uppercase tracking-wider mb-2">E-mail</p>
-                                        <a href="mailto:contato@kprojecoes.com.br" className="text-white/90 hover:text-white transition">
-                                            contato@kprojecoes.com.br
-                                        </a>
-                                    </div>
-                                    <div>
-                                        <p className="text-white/40 text-xs uppercase tracking-wider mb-2">Localização</p>
-                                        <p className="text-white/70">Ananindeua, PA</p>
-                                    </div>
-                                </motion.div>
                             </motion.nav>
+
+                            {/* CTA Button */}
+                            <motion.div
+                                variants={navLinkVariants}
+                                className="mb-12"
+                            >
+                                <button
+                                    onClick={() => {
+                                        setMenuOpen(false);
+                                        handleWhatsAppClick('mobile_menu_cta');
+                                    }}
+                                    className="w-full max-w-md px-8 py-5 bg-white text-black hover:bg-white/90 transition-all duration-300 rounded-xl font-semibold text-xl"
+                                >
+                                    Solicitar Orçamento
+                                </button>
+                            </motion.div>
+
+                            {/* Info de Contato */}
+                            <motion.div
+                                variants={navLinkVariants}
+                                className="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-8 border-t border-white/10 max-w-4xl"
+                            >
+                                <div>
+                                    <p className="text-white/40 text-xs uppercase tracking-wider mb-2">Telefone</p>
+                                    <a href="tel:+5591981125595" className="text-white/90 hover:text-white transition text-lg">
+                                        (91) 998112-5595
+                                    </a>
+                                </div>
+                                <div>
+                                    <p className="text-white/40 text-xs uppercase tracking-wider mb-2">E-mail</p>
+                                    <a href="mailto:kprogecoes.oficial@gmail.com" className="text-white/90 hover:text-white transition text-lg break-all">
+                                        kprogecoes.oficial@gmail.com
+                                    </a>
+                                </div>
+                                <div>
+                                    <p className="text-white/40 text-xs uppercase tracking-wider mb-2">Localização</p>
+                                    <p className="text-white/70 text-lg">Belém, PA</p>
+                                </div>
+                            </motion.div>
                         </motion.div>
-                    </>
+
+                        {/* Decorative Elements */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 0.1 }}
+                            transition={{ delay: 0.6 }}
+                            className="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full blur-[150px] pointer-events-none"
+                        />
+                    </motion.div>
                 )}
             </AnimatePresence>
         </>
