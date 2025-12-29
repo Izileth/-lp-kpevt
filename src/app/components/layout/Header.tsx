@@ -4,13 +4,8 @@ import { openWhatsApp } from '../../lib/whatsapp';
 import { useScrollVisibility } from '../../hooks/useScrollVisibility';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Variants } from 'framer-motion';
+import { navLinks } from '../../types/links';
 
-const navLinks = [
-    { href: '#servicos', label: 'Serviços' },
-    { href: '#eventos', label: 'Eventos' },
-    { href: '#depoimentos', label: 'Depoimentos' },
-    { href: '#contato', label: 'Contato' },
-];
 
 export const Header: React.FC = () => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -107,7 +102,7 @@ export const Header: React.FC = () => {
 
                     {/* Mobile Menu Button */}
                     <button
-                        className="md:hidden relative z-[60] w-10 h-10 flex items-center justify-center"
+                        className="md:hidden relative  w-10 h-10 flex items-center justify-center"
                         onClick={() => setMenuOpen(!menuOpen)}
                         aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
                     >
@@ -149,7 +144,7 @@ export const Header: React.FC = () => {
                         className="fixed inset-0 bg-black z-50 md:hidden"
                     >
                         {/* Header com Logo e Botão Fechar */}
-                        <div className="absolute top-0 left-0 right-0 z-[60] bg-transparent">
+                        <div className="absolute top-0 left-0 right-0 bg-transparent">
                             <div className="container mx-auto px-4 py-4 flex items-center justify-between">
                                 <motion.div 
                                     className="text-2xl font-bold"
