@@ -15,7 +15,7 @@ import { AnimatedSection } from '../components/ui/AnimatedSection';
 import { services, eventTypes, testimonials, differentials } from '../lib/data';
 
 
-export default function KProjecoes() {
+export default function Home() {
     // Initialize Google Analytics for the page
     useAnalytics();
 

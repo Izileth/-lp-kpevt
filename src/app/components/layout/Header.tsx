@@ -5,11 +5,11 @@ import { useScrollVisibility } from '../../hooks/useScrollVisibility';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { navLinks } from '../../types/links';
-
-
+import { useNavigate } from 'react-router-dom';
 export const Header: React.FC = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const isScrolled = useScrollVisibility(50);
+    const navigate = useNavigate();
 
     const handleWhatsAppClick = (eventName: string) => {
         openWhatsApp(undefined, eventName);
@@ -84,9 +84,9 @@ export const Header: React.FC = () => {
                     {/* Desktop Menu */}
                     <div className="hidden md:flex items-center space-x-8">
                         {navLinks.map(link => (
-                            <a key={link.href} href={link.href} className="hover:text-white/70 transition">
+                            <button key={link.path} onClick={() => navigate(link.path)} className="hover:text-white/70 transition bg-transparent border-none text-white cursor-pointer text-base">
                                 {link.label}
-                            </a>
+                            </button>
                         ))}
                     </div>
 
@@ -197,14 +197,16 @@ export const Header: React.FC = () => {
                                 <ul className="space-y-2">
                                     {navLinks.map((link, index) => (
                                         <motion.li 
-                                            key={link.href} 
+                                            key={link.path} 
                                             variants={navLinkVariants}
                                             className="overflow-hidden"
                                         >
-                                            <a
-                                                href={link.href}
-                                                className="block text-4xl md:text-5xl font-bold hover:text-white/70 transition-colors py-3 group"
-                                                onClick={() => setMenuOpen(false)}
+                                            <button
+                                                onClick={() => {
+                                                    navigate(link.path);
+                                                    setMenuOpen(false);
+                                                }}
+                                                className="block text-4xl md:text-5xl font-bold hover:text-white/70 transition-colors py-3 group bg-transparent border-none text-white cursor-pointer w-full text-left"
                                             >
                                                 <span className="text-white/30 text-base font-normal mr-4 inline-block w-8">
                                                     0{index + 1}
@@ -212,7 +214,7 @@ export const Header: React.FC = () => {
                                                 <span className="inline-block group-hover:translate-x-2 transition-transform">
                                                     {link.label}
                                                 </span>
-                                            </a>
+                                            </button>
                                         </motion.li>
                                     ))}
                                 </ul>

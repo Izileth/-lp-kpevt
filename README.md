@@ -1,75 +1,68 @@
-# React + TypeScript + Vite
+# pk-project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a modern React application bootstrapped with Vite and styled with Tailwind CSS, offering a fast development experience and optimized production builds. It includes routing powered by `react-router-dom` and animations with `framer-motion`.
 
-Currently, two official plugins are available:
+## Technologies Used
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+*   **React:** A JavaScript library for building user interfaces.
+*   **Vite:** A fast build tool that provides a lightning-fast development experience for modern web projects.
+*   **TypeScript:** A typed superset of JavaScript that compiles to plain JavaScript.
+*   **Tailwind CSS:** A utility-first CSS framework for rapidly building custom designs.
+*   **React Router DOM:** Declarative routing for React.js.
+*   **Framer Motion:** A production-ready motion library for React.
+*   **Lucide React:** A beautiful and consistent icon toolkit.
 
-## React Compiler
+## Project Structure (Layout Components)
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+The main layout components are located in `src/app/components/layout`:
 
-Note: This will impact Vite dev & build performances.
+*   `Header.tsx`: Handles the top navigation and branding of the application.
+*   `Hero.tsx`: Displays the main introductory section, often with a prominent call to action.
+*   `Footer.tsx`: Contains copyright information, links, and other bottom-of-page content.
 
-## Expanding the ESLint configuration
+## Color Palette
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+The project primarily utilizes a dark theme with the following base colors:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+*   **Background:** Black (`#000`)
+*   **Text:** White / Light Gray (`rgba(255, 255, 255, 0.87)`)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Further styling and color definitions are primarily managed through Tailwind CSS utility classes directly within the components.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Available Scripts
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+In the project directory, you can run:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+*   ### `npm run dev`
+    Runs the app in development mode.
+    Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
+    The page will reload if you make edits.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+*   ### `npm run build`
+    Builds the app for production to the `dist` folder.
+    It correctly bundles React in production mode and optimizes the build for the best performance.
+
+*   ### `npm run lint`
+    Lints the project files for potential errors and style violations.
+
+*   ### `npm run preview`
+    Locally previews your production build.
+
+## Installation and Usage
+
+To get started with the project, follow these steps:
+
+1.  **Clone the repository:**
+    ```bash
+    git clone <repository-url>
+    cd pk-project
+    ```
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+3.  **Start the development server:**
+    ```bash
+    npm run dev
+    ```
+    This will open the application in your browser at `http://localhost:5173`.

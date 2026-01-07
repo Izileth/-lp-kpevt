@@ -1,12 +1,11 @@
-
+import { Outlet } from 'react-router-dom';
 import { useSmoothScroll } from './app/hooks/useSmoothScroll';
-import KProjecoes from './app/pages'
 
 function App() {
   useSmoothScroll();
 
   return (
-    <KProjecoes />
+    <Outlet />
   )
 }
 
