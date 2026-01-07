@@ -1,11 +1,11 @@
-
+import  { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, Play, Users, Calendar, Lightbulb, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-
-const Events = () => {
+const ServicesPage = () => {
+  const [selectedService, setSelectedService] = useState(null);
   const navigate = useNavigate();
-  
+
   const services = [
     {
       id: 1,
@@ -89,7 +89,7 @@ const Events = () => {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: [0.22, 1, 0.36, 1]
+        ease: [0.22, 1, 0.36, 1] as const
       }
     }
   };
@@ -101,7 +101,7 @@ const Events = () => {
       scale: 1,
       transition: {
         duration: 1.2,
-        ease: [0.22, 1, 0.36, 1]
+        ease: [0.22, 1, 0.36, 1] as const
       }
     }
   };
@@ -136,7 +136,7 @@ const Events = () => {
             transition={{ duration: 1, delay: 0.3 }}
           >
             <h1 className="text-7xl md:text-9xl font-bold mb-6 tracking-tight">
-              EVENTOS
+              SERVIÇOS
             </h1>
           </motion.div>
           <motion.p
@@ -174,7 +174,8 @@ const Events = () => {
               key={service.id}
               variants={itemVariants}
               className="group relative overflow-hidden cursor-pointer"
-
+              onMouseEnter={() => setSelectedService(service.id)}
+              onMouseLeave={() => setSelectedService(null)}
             >
               <div className="relative h-80 overflow-hidden">
                 <motion.img
@@ -327,7 +328,7 @@ const Events = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/contact')}
             className="bg-white text-black px-12 py-4 text-lg font-semibold hover:bg-gray-200 transition-colors"
           >
             Entre em contato
@@ -338,4 +339,4 @@ const Events = () => {
   );
 };
 
-export default Events;
+export default ServicesPage;
