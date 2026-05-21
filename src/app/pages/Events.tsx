@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, Play, Users, Calendar, Lightbulb, Sparkles, ArrowUpRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { SEO } from '../components/ui/SEO';
 
 const Events = () => {
   const [selectedService, setSelectedService] = useState<number | null>(null);
@@ -125,6 +126,10 @@ const Events = () => {
 
   return (
     <div className="min-h-screen bg-[#000000] text-[#ffffff]">
+      <SEO 
+        title="Nossos Serviços e Eventos" 
+        description="Conheça nossos serviços de projeção mapeada, sonorização e iluminação para eventos corporativos, shows e festivais."
+      />
       {/* Hero Section with Image */}
       <motion.section
         initial={{ opacity: 0 }}

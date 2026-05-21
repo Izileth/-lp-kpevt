@@ -5,10 +5,15 @@ import { FloatingWhatsAppButton } from '../components/ui/FloatingWhatsAppButton'
 import { AnimatedSection } from '../components/ui/AnimatedSection';
 import { ContactForm } from '../components/ui/ContactForm';
 import { ContactInfo } from '../components/ui/ContactInfo';
+import { SEO } from '../components/ui/SEO';
 
 const Contact: React.FC = () => {
   return (
     <div className="min-h-screen bg-black text-white">
+      <SEO 
+        title="Contato" 
+        description="Entre em contato com a K Projeções & Eventos para solicitar um orçamento para seu evento, formatura ou solenidade."
+      />
       <Header />
 
       <main>

@@ -11,6 +11,7 @@ import { ContactInfo } from '../components/ui/ContactInfo';
 import { Footer } from '../components/layout/Footer';
 import { FloatingWhatsAppButton } from '../components/ui/FloatingWhatsAppButton';
 import { AnimatedSection } from '../components/ui/AnimatedSection';
+import { SEO } from '../components/ui/SEO';
 
 import { services, eventTypes, testimonials, differentials } from '../lib/data';
 
@@ -19,8 +20,49 @@ export default function Home() {
     // Initialize Google Analytics for the page
     useAnalytics();
 
+    const structuredData = {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "K Projeções & Eventos",
+        "image": "/assets/logo.png",
+        "description": "Especialistas em sonorização, iluminação e estrutura completa para eventos, formaturas e solenidades.",
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "BR"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "-23.5505",
+            "longitude": "-46.6333"
+        },
+        "url": "https://kprojecoes.com.br",
+        "telephone": "+550000000000",
+        "openingHoursSpecification": [
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday"
+                ],
+                "opens": "09:00",
+                "closes": "18:00"
+            }
+        ],
+        "sameAs": [
+            "https://www.instagram.com/kprojecoes"
+        ]
+    };
+
     return (
         <div className="min-h-screen bg-black text-white">
+            <SEO 
+                title="Página Inicial" 
+                description="Transformamos seu evento em uma experiência memorável com som e luz profissional."
+                structuredData={structuredData}
+            />
             <Header />
 
             <main>
