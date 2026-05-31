@@ -1,68 +1,72 @@
-# pk-project
+# K Projeções & Eventos
 
-This is a modern React application bootstrapped with Vite and styled with Tailwind CSS, offering a fast development experience and optimized production builds. It includes routing powered by `react-router-dom` and animations with `framer-motion`.
+Uma landing page moderna e performática para a **K Projeções & Eventos**, empresa especializada em soluções audiovisuais completas para eventos, formaturas e solenidades em Belém e região.
 
-## Technologies Used
+## 🚀 Tecnologias
 
-*   **React:** A JavaScript library for building user interfaces.
-*   **Vite:** A fast build tool that provides a lightning-fast development experience for modern web projects.
-*   **TypeScript:** A typed superset of JavaScript that compiles to plain JavaScript.
-*   **Tailwind CSS:** A utility-first CSS framework for rapidly building custom designs.
-*   **React Router DOM:** Declarative routing for React.js.
-*   **Framer Motion:** A production-ready motion library for React.
-*   **Lucide React:** A beautiful and consistent icon toolkit.
+Este projeto foi desenvolvido utilizando as tecnologias mais modernas do ecossistema web:
 
-## Project Structure (Layout Components)
+- **React 18** - Biblioteca para interfaces de usuário.
+- **TypeScript** - Tipagem estática para maior segurança e produtividade.
+- **Vite** - Build tool extremamente rápida.
+- **Tailwind CSS** - Framework CSS utilitário para estilização rápida e responsiva.
+- **Framer Motion** - Biblioteca para animações fluidas e interativas.
+- **React Helmet Async** - Gerenciamento robusto de SEO e Meta Tags.
+- **Lucide React** - Conjunto de ícones elegantes e leves.
 
-The main layout components are located in `src/app/components/layout`:
+## ✨ Funcionalidades
 
-*   `Header.tsx`: Handles the top navigation and branding of the application.
-*   `Hero.tsx`: Displays the main introductory section, often with a prominent call to action.
-*   `Footer.tsx`: Contains copyright information, links, and other bottom-of-page content.
+- **Design Responsivo**: Adaptado para dispositivos móveis, tablets e desktops.
+- **Animações Interativas**: Scroll suave e surgimento gradual de seções.
+- **Integração com WhatsApp**: Botões flutuantes e chamadas para ação configuradas.
+- **SEO Avançado**: 
+  - Meta tags dinâmicas por página.
+  - Dados estruturados (JSON-LD) para `LocalBusiness`, `Service` e `ContactPage`.
+  - Configurações centralizadas para fácil manutenção.
+- **Analytics**: Integração pronta para monitoramento de tráfego.
 
-## Color Palette
+## 📦 Como rodar o projeto
 
-The project primarily utilizes a dark theme with the following base colors:
+### Pré-requisitos
+- Node.js (versão 18 ou superior)
+- npm ou yarn
 
-*   **Background:** Black (`#000`)
-*   **Text:** White / Light Gray (`rgba(255, 255, 255, 0.87)`)
+### Instalação
+1. Clone o repositório.
+2. Instale as dependências:
+   ```bash
+   npm install
+   ```
 
-Further styling and color definitions are primarily managed through Tailwind CSS utility classes directly within the components.
+### Desenvolvimento
+Inicie o servidor de desenvolvimento:
+```bash
+npm run dev
+```
 
-## Available Scripts
+### Build para Produção
+Gere os arquivos otimizados:
+```bash
+npm run build
+```
+O resultado estará na pasta `dist/`.
 
-In the project directory, you can run:
+## 🛠️ Estrutura de Pastas
 
-*   ### `npm run dev`
-    Runs the app in development mode.
-    Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
-    The page will reload if you make edits.
+```
+src/
+├── app/
+│   ├── components/    # Componentes de UI e Layout
+│   ├── hooks/         # Hooks personalizados (scroll, visibilidade)
+│   ├── lib/           # Lógica de negócio, dados e config de SEO
+│   ├── pages/         # Páginas da aplicação (Home, Events, Contact)
+│   └── types/         # Definições de tipos TypeScript
+└── main.tsx           # Ponto de entrada
+```
 
-*   ### `npm run build`
-    Builds the app for production to the `dist` folder.
-    It correctly bundles React in production mode and optimizes the build for the best performance.
+## 📝 Licença
 
-*   ### `npm run lint`
-    Lints the project files for potential errors and style violations.
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-*   ### `npm run preview`
-    Locally previews your production build.
-
-## Installation and Usage
-
-To get started with the project, follow these steps:
-
-1.  **Clone the repository:**
-    ```bash
-    git clone <repository-url>
-    cd pk-project
-    ```
-2.  **Install dependencies:**
-    ```bash
-    npm install
-    ```
-3.  **Start the development server:**
-    ```bash
-    npm run dev
-    ```
-    This will open the application in your browser at `http://localhost:5173`.
+---
+Desenvolvido com ❤️ para a **K Projeções & Eventos**.
