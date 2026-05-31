@@ -8,11 +8,33 @@ import { ContactInfo } from '../components/ui/ContactInfo';
 import { SEO } from '../components/ui/SEO';
 
 const Contact: React.FC = () => {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "mainEntity": {
+      "@type": "LocalBusiness",
+      "name": "K Projeções & Eventos",
+      "image": "https://kprojecoes.com.br/assets/logo.png",
+      "telephone": "+5591981125595",
+      "email": "kprogecoes.oficial@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Rod. Mário Covas",
+        "addressLocality": "Ananindeua",
+        "addressRegion": "PA",
+        "postalCode": "67113-330",
+        "addressCountry": "BR"
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen bg-black text-white">
       <SEO 
-        title="Contato" 
-        description="Entre em contato com a K Projeções & Eventos para solicitar um orçamento para seu evento, formatura ou solenidade."
+        title="Entre em Contato | Solicite seu Orçamento" 
+        description="Fale com a K Projeções & Eventos. Estamos prontos para atender seu evento com as melhores soluções em som, luz e projeção."
+        keywords="contato sonorização, orçamento iluminação eventos, contratar projeção mapeada, som para formaturas sp"
+        structuredData={structuredData}
       />
       <Header />
 

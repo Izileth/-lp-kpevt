@@ -124,11 +124,31 @@ const Events = () => {
     navigate(route);
   };
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": services.map((service, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "Service",
+        "name": service.title,
+        "description": service.description,
+        "provider": {
+          "@type": "LocalBusiness",
+          "name": "K Projeções & Eventos"
+        }
+      }
+    }))
+  };
+
   return (
     <div className="min-h-screen bg-[#000000] text-[#ffffff]">
       <SEO 
-        title="Nossos Serviços e Eventos" 
-        description="Conheça nossos serviços de projeção mapeada, sonorização e iluminação para eventos corporativos, shows e festivais."
+        title="Nossos Serviços e Portfólio de Eventos" 
+        description="Conheça nossos serviços especializados em projeção mapeada, sonorização e iluminação. Veja nossos cases em eventos corporativos, shows e festivais."
+        keywords="projeção mapeada, eventos corporativos, sonorização de shows, iluminação cênica, vj para eventos"
+        structuredData={structuredData}
       />
       {/* Hero Section with Image */}
       <motion.section

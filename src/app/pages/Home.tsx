@@ -24,45 +24,55 @@ export default function Home() {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "name": "K Projeções & Eventos",
-        "image": "/assets/logo.png",
-        "description": "Especialistas em sonorização, iluminação e estrutura completa para eventos, formaturas e solenidades.",
+        "image": "https://kprojecoes.com.br/assets/logo.png",
+        "description": "Especialistas em sonorização, iluminação e estrutura completa para eventos, formaturas e solenidades em Belém, Ananindeua e região.",
+        "url": "https://kprojecoes.com.br",
+        "telephone": "+5591981125595",
+        "priceRange": "$$",
         "address": {
             "@type": "PostalAddress",
+            "streetAddress": "Rod. Mário Covas",
+            "addressLocality": "Ananindeua",
+            "addressRegion": "PA",
+            "postalCode": "67113-330",
             "addressCountry": "BR"
         },
         "geo": {
             "@type": "GeoCoordinates",
-            "latitude": "-23.5505",
-            "longitude": "-46.6333"
+            "latitude": "-1.3624",
+            "longitude": "-48.4277"
         },
-        "url": "https://kprojecoes.com.br",
-        "telephone": "+550000000000",
         "openingHoursSpecification": [
             {
                 "@type": "OpeningHoursSpecification",
-                "dayOfWeek": [
-                    "Monday",
-                    "Tuesday",
-                    "Wednesday",
-                    "Thursday",
-                    "Friday"
-                ],
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
                 "opens": "09:00",
                 "closes": "18:00"
             }
         ],
         "sameAs": [
-            "https://www.instagram.com/kprojecoes"
-        ]
+            "https://www.instagram.com/kprojecoes",
+            "https://www.facebook.com/kprojecoes",
+            "https://www.linkedin.com/company/k-projecoes-eventos"
+        ],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+5591981125595",
+            "contactType": "customer service",
+            "areaServed": "BR",
+            "availableLanguage": "Portuguese"
+        }
     };
 
     return (
         <div className="min-h-screen bg-black text-white">
             <SEO 
-                title="Página Inicial" 
-                description="Transformamos seu evento em uma experiência memorável com som e luz profissional."
+                title="Sonorização e Iluminação Profissional para Eventos" 
+                description="Transformamos seu evento em uma experiência memorável com som e luz profissional. Especialistas em formaturas, casamentos e eventos corporativos."
+                keywords="sonorização profissional, iluminação de eventos, estrutura para formaturas, som e luz belém, projeção mapeada"
                 structuredData={structuredData}
             />
+
             <Header />
 
             <main>
