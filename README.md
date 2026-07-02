@@ -1,20 +1,20 @@
-# K Projeções & Eventos
+#  Projeções & Eventos
 
 Uma landing page moderna e performática para a **K Projeções & Eventos**, empresa especializada em soluções audiovisuais completas para eventos, formaturas e solenidades em Belém e região.
 
-## 🚀 Tecnologias
+## Tecnologias
 
 Este projeto foi desenvolvido utilizando as tecnologias mais modernas do ecossistema web:
 
 - **React 18** - Biblioteca para interfaces de usuário.
-- **TypeScript** - Tipagem estática para maior segurança e produtividade.
+- **TypeScript** - Tipagem estática para maior segurnça e produtividade.
 - **Vite** - Build tool extremamente rápida.
 - **Tailwind CSS** - Framework CSS utilitário para estilização rápida e responsiva.
 - **Framer Motion** - Biblioteca para animações fluidas e interativas.
 - **React Helmet Async** - Gerenciamento robusto de SEO e Meta Tags.
 - **Lucide React** - Conjunto de ícones elegantes e leves.
 
-## ✨ Funcionalidades
+##  Funcionalidades
 
 - **Design Responsivo**: Adaptado para dispositivos móveis, tablets e desktops.
 - **Animações Interativas**: Scroll suave e surgimento gradual de seções.
@@ -25,7 +25,7 @@ Este projeto foi desenvolvido utilizando as tecnologias mais modernas do ecossis
   - Configurações centralizadas para fácil manutenção.
 - **Analytics**: Integração pronta para monitoramento de tráfego.
 
-## 📦 Como rodar o projeto
+##  Como rodar o projeto
 
 ### Pré-requisitos
 - Node.js (versão 18 ou superior)
@@ -64,7 +64,7 @@ src/
 └── main.tsx           # Ponto de entrada
 ```
 
-## 📝 Licença
+##  Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 

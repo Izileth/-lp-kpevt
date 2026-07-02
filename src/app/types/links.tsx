@@ -3,3 +3,4 @@ export const navLinks = [
     { path: '/events', label: 'Eventos' },
     { path: '/contact', label: 'Contato' },
 ];
+
