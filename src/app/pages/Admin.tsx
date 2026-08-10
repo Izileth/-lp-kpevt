@@ -56,9 +56,9 @@ export default function Admin() {
         fetchData();
     }, []);
 
-    
 
-    
+
+
     async function fetchData() {
         const { data: tData } = await supabase
             .from("email_templates")
@@ -102,7 +102,7 @@ export default function Admin() {
     const handleCreateTemplate = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatusMsg("Salvando template...");
-        
+
         // Converte o que foi digitado em markdown para HTML antes de salvar
         const convertedHtml = parseMarkdown(templateHtml);
 
@@ -177,7 +177,7 @@ export default function Admin() {
 
         // 2) Inserir registros na tabela email_sends (fila de envio)
         const clientesParaEnvio = clientes.filter(c => selectedClientes.includes(c.id));
-        
+
         const sends = clientesParaEnvio.map(c => ({
             campaign_id: newCampaign.id,
             cliente_id: c.id,
@@ -211,30 +211,17 @@ export default function Admin() {
 
     const handleSendCampaign = async (id: string) => {
         setStatusMsg("Agendando e iniciando disparo...");
-        
-        // 1) Marca a campanha como 'agendada' e seta a data para o momento atual
-        const { error: updateErr } = await supabase
-            .from("email_campaigns")
-            .update({ 
-                status: "agendada",
-                agendada_para: new Date().toISOString() 
-            })
-            .eq("id", id);
 
-        if (updateErr) {
-            setStatusMsg(`Erro ao agendar: ${updateErr.message}`);
-            return;
-        }
+        const { error } = await supabase.rpc("enviar_campanha_agora", {
+            p_campaign_id: id,
+        });
 
-        // 2) Aciona a função RPC no banco para processar a fila
-        const { error: rpcErr } = await supabase.rpc("disparar_campanhas_agendadas");
-
-        if (rpcErr) {
-            setStatusMsg(`Erro ao acionar o disparo: ${rpcErr.message}`);
+        if (error) {
+            setStatusMsg(`Erro ao enviar: ${error.message}`);
         } else {
             setStatusMsg("Campanha enviada para processamento com sucesso!");
         }
-        
+
         fetchData();
     };
 
@@ -360,7 +347,7 @@ export default function Admin() {
 
                             {/* SELEÇÃO DE DESTINATÁRIOS — email_sends */}
                             <div className="border-t border-black/10 pt-6">
-                                
+
                                 <div className="mb-8">
                                     <label className="block text-[10px] uppercase font-bold tracking-widest text-black/50 mb-1">
                                         E-mails Personalizados (Separados por vírgula)
