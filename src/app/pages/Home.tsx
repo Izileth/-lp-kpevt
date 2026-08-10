@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { NewsletterForm } from "../components/ui/NewsletterForm";
 
 /**
  * Home
@@ -171,18 +172,30 @@ export default function Home({
                     <div className="text-[10px] font-medium uppercase tracking-[0.18em] sm:text-[11px]">
                         [&nbsp;Reach Out&nbsp;]
                     </div>
-                    <div className="sm:pl-0">
-                        {reachOutLinks.map((link) => (
-                            <a
-                                key={link.label}
-                                href={link.href}
-                                target={link.href.startsWith("http") ? "_blank" : undefined}
-                                rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                                className="block text-[13vw] font-black uppercase leading-[0.9] tracking-tight transition-opacity hover:opacity-60 sm:text-[6.2vw] lg:text-[6vw] xl:text-[64px]"
-                            >
-                                {link.label}
-                            </a>
-                        ))}
+                    <div className="sm:pl-0 flex flex-col gap-10">
+                        <div>
+                            {reachOutLinks.map((link) => (
+                                <a
+                                    key={link.label}
+                                    href={link.href}
+                                    target={link.href.startsWith("http") ? "_blank" : undefined}
+                                    rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                                    className="block text-[13vw] font-black uppercase leading-[0.9] tracking-tight transition-opacity hover:opacity-60 sm:text-[6.2vw] lg:text-[6vw] xl:text-[64px]"
+                                >
+                                    {link.label}
+                                </a>
+                            ))}
+                        </div>
+                        
+                        <div className="mt-8 sm:mt-12 border-t border-black/10 pt-8">
+                            <h3 className="text-[13vw] sm:text-[4vw] font-black uppercase leading-[0.9] tracking-tight mb-4">
+                                NEWSLETTER
+                            </h3>
+                            <p className="text-[12px] font-normal normal-case leading-relaxed tracking-normal text-black/90 mb-4">
+                                Receba nossas atualizações de marketing e novidades de projetos.
+                            </p>
+                            <NewsletterForm />
+                        </div>
                     </div>
                 </div>
 
