@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
+import { useAuth } from "../contexts/AuthContext";
 
 type Template = { id: string; nome: string };
 type Campaign = { id: string; nome: string; status: string };
 
 export default function Admin() {
+    const { signOut } = useAuth();
+
     const [templates, setTemplates] = useState<Template[]>([]);
     const [campaigns, setCampaigns] = useState<Campaign[]>([]);
 
@@ -93,8 +96,14 @@ export default function Admin() {
             style={{ fontFamily: "'Archivo Black', 'Inter', Helvetica, Arial, sans-serif" }}
         >
             <div className="mx-auto flex min-h-screen w-full max-w-[1400px] flex-col px-5 py-6 sm:px-10 sm:py-8 lg:px-16">
-                <header className="mb-12 border-b border-black/10 pb-4 text-[10px] font-medium uppercase tracking-[0.18em] sm:text-[11px]">
-                    [&nbsp;ADMIN DASHBOARD - E-MAIL MARKETING&nbsp;]
+                <header className="mb-12 border-b border-black/10 pb-4 text-[10px] font-medium uppercase tracking-[0.18em] sm:text-[11px] flex justify-between items-center">
+                    <span>[&nbsp;ADMIN DASHBOARD - E-MAIL MARKETING&nbsp;]</span>
+                    <button 
+                        onClick={signOut}
+                        className="hover:opacity-60 transition-opacity underline underline-offset-4"
+                    >
+                        SAIR
+                    </button>
                 </header>
 
                 {statusMsg && (

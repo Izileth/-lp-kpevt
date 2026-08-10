@@ -4,6 +4,8 @@ import Home from "./pages/Home";
 import Events from "./pages/Events";
 import Contact from "./pages/Contact";
 import Admin from "./pages/Admin";
+import Login from "./pages/Login";
+import { ProtectedRoute } from "./components/ui/ProtectedRoute";
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -22,8 +24,16 @@ export const router = createBrowserRouter([
                 element: <Contact />,
             },
             {
+                path: "/login",
+                element: <Login />,
+            },
+            {
                 path: "/admin",
-                element: <Admin />,
+                element: (
+                    <ProtectedRoute>
+                        <Admin />
+                    </ProtectedRoute>
+                ),
             },
         ]
     },
