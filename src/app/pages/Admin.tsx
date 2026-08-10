@@ -40,15 +40,16 @@ export default function Admin() {
     const [templateName, setTemplateName] = useState("");
     const [templateSubject, setTemplateSubject] = useState("");
     const [templateHtml, setTemplateHtml] = useState("");
-    const [templateText, setTemplateText] = useState("");
+    const [ setTemplateText] = useState("");
 
     // Campaign Form
     const [campaignName, setCampaignName] = useState("");
     const [selectedTemplate, setSelectedTemplate] = useState("");
-    const [senderName, setSenderName] = useState("Equipe");
-    const [senderEmail, setSenderEmail] = useState("");
+    const [senderName, setSenderName] = useState("K Projeções");
+    const senderEmail = "contato@kprojecoes.online"; // FIXO
     const [scheduledFor, setScheduledFor] = useState("");
     const [selectedClientes, setSelectedClientes] = useState<string[]>([]);
+    const [customRecipients, setCustomRecipients] = useState(""); // DESTINATÁRIOS CUSTOMIZADOS
 
     const [statusMsg, setStatusMsg] = useState("");
     const [activeTab, setActiveTab] = useState<"templates" | "campanhas" | "stats">("templates");
@@ -84,15 +85,31 @@ export default function Admin() {
         if (sData) setStats(sData);
     }
 
+    // Função simples para converter Markdown básico para HTML
+    const parseMarkdown = (text: string) => {
+        let html = text;
+        html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+        html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+        html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+        html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+        html = html.replace(/\n/gim, '<br />');
+        return html;
+    };
+
     // ── TEMPLATES ──────────────────────────────────────────
     const handleCreateTemplate = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatusMsg("Salvando template...");
+        
+        // Converte o que foi digitado em markdown para HTML antes de salvar
+        const convertedHtml = parseMarkdown(templateHtml);
+
         const { error } = await supabase.from("email_templates").insert([{
             nome: templateName,
             assunto: templateSubject,
-            conteudo_html: templateHtml,
-            conteudo_texto: templateText || null,
+            conteudo_html: convertedHtml,
+            conteudo_texto: templateHtml, // Guarda a versão original como texto fallback
         }]);
         if (error) {
             setStatusMsg(`Erro: ${error.message}`);
@@ -121,8 +138,14 @@ export default function Admin() {
     const handleCreateCampaign = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (selectedClientes.length === 0) {
-            setStatusMsg("Selecione ao menos 1 destinatário.");
+        // Processar destinatários customizados separados por vírgula
+        const customEmails = customRecipients
+            .split(',')
+            .map(e => e.trim())
+            .filter(e => e !== "");
+
+        if (selectedClientes.length === 0 && customEmails.length === 0) {
+            setStatusMsg("Selecione ao menos 1 destinatário na lista ou adicione um e-mail personalizado.");
             return;
         }
 
@@ -153,12 +176,25 @@ export default function Admin() {
 
         // 2) Inserir registros na tabela email_sends (fila de envio)
         const clientesParaEnvio = clientes.filter(c => selectedClientes.includes(c.id));
+        
         const sends = clientesParaEnvio.map(c => ({
             campaign_id: newCampaign.id,
             cliente_id: c.id,
             email: c.email,
             status: "pendente" as const,
         }));
+
+        // Adicionar os destinatários personalizados na fila (sem cliente_id vinculado)
+        // OBS: A migration 002.sql obriga cliente_id como NOT NULL, para aceitar nulo você deve rodar no SQL:
+        // ALTER TABLE public.email_sends ALTER COLUMN cliente_id DROP NOT NULL;
+        customEmails.forEach(emailCustomizado => {
+            sends.push({
+                campaign_id: newCampaign.id,
+                cliente_id: null as any, // Veja a nota acima
+                email: emailCustomizado,
+                status: "pendente" as const,
+            });
+        });
 
         const { error: sendsErr } = await supabase.from("email_sends").insert(sends);
 
@@ -168,7 +204,7 @@ export default function Admin() {
             setStatusMsg(`Campanha criada com ${sends.length} destinatário(s) na fila!`);
         }
 
-        setCampaignName(""); setSenderEmail(""); setScheduledFor(""); setSelectedClientes([]);
+        setCampaignName(""); setScheduledFor(""); setSelectedClientes([]); setCustomRecipients("");
         fetchData();
     };
 
@@ -244,13 +280,8 @@ export default function Admin() {
                             <input type="text" placeholder="Assunto do E-mail" required value={templateSubject} onChange={e => setTemplateSubject(e.target.value)}
                                 className="w-full bg-transparent border-b border-black/20 px-0 py-3 focus:outline-none focus:border-black transition text-sm" />
                             <div>
-                                <label className="block text-[10px] uppercase font-bold tracking-widest text-black/50 mb-1">Conteúdo HTML *</label>
-                                <textarea placeholder="<h1>Olá {{nome}}</h1>..." required rows={6} value={templateHtml} onChange={e => setTemplateHtml(e.target.value)}
-                                    className="w-full bg-transparent border border-black/10 p-3 focus:outline-none focus:border-black transition text-sm resize-none font-mono" />
-                            </div>
-                            <div>
-                                <label className="block text-[10px] uppercase font-bold tracking-widest text-black/50 mb-1">Conteúdo Texto (Fallback / Deliverability)</label>
-                                <textarea placeholder="Versão plain-text do e-mail..." rows={3} value={templateText} onChange={e => setTemplateText(e.target.value)}
+                                <label className="block text-[10px] uppercase font-bold tracking-widest text-black/50 mb-1">Mensagem do E-mail (Markdown suportado: # Título, **Negrito**)</label>
+                                <textarea placeholder="# Olá {{nome}}&#10;&#10;Esta é uma **mensagem** formatada..." required rows={6} value={templateHtml} onChange={e => setTemplateHtml(e.target.value)}
                                     className="w-full bg-transparent border border-black/10 p-3 focus:outline-none focus:border-black transition text-sm resize-none font-mono" />
                             </div>
                             <button type="submit" className="mt-2 self-start bg-black text-white px-8 py-4 uppercase text-[10px] font-bold tracking-[0.18em] hover:opacity-80 transition-opacity">
@@ -294,10 +325,16 @@ export default function Admin() {
                             </div>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <input type="text" placeholder="Nome do Remetente" required value={senderName} onChange={e => setSenderName(e.target.value)}
-                                    className="w-full bg-transparent border-b border-black/20 px-0 py-3 focus:outline-none focus:border-black transition text-sm" />
-                                <input type="email" placeholder="E-mail Remetente (Resend)" required value={senderEmail} onChange={e => setSenderEmail(e.target.value)}
-                                    className="w-full bg-transparent border-b border-black/20 px-0 py-3 focus:outline-none focus:border-black transition text-sm" />
+                                <div>
+                                    <label className="block text-[10px] uppercase font-bold tracking-widest text-black/50 mb-1">Nome do Remetente</label>
+                                    <input type="text" placeholder="Nome do Remetente" required value={senderName} onChange={e => setSenderName(e.target.value)}
+                                        className="w-full bg-transparent border-b border-black/20 px-0 py-3 focus:outline-none focus:border-black transition text-sm" />
+                                </div>
+                                <div>
+                                    <label className="block text-[10px] uppercase font-bold tracking-widest text-black/50 mb-1">E-mail Remetente</label>
+                                    <input type="email" disabled value={senderEmail}
+                                        className="w-full bg-transparent border-b border-black/20 px-0 py-3 text-sm text-black/50 cursor-not-allowed" />
+                                </div>
                             </div>
 
                             <DateTimePicker
@@ -308,9 +345,19 @@ export default function Admin() {
 
                             {/* SELEÇÃO DE DESTINATÁRIOS — email_sends */}
                             <div className="border-t border-black/10 pt-6">
+                                
+                                <div className="mb-8">
+                                    <label className="block text-[10px] uppercase font-bold tracking-widest text-black/50 mb-1">
+                                        E-mails Personalizados (Separados por vírgula)
+                                    </label>
+                                    <input type="text" placeholder="exemplo@gmail.com, outro@hotmail.com" value={customRecipients} onChange={e => setCustomRecipients(e.target.value)}
+                                        className="w-full bg-transparent border-b border-black/20 px-0 py-3 focus:outline-none focus:border-black transition text-sm" />
+                                    <p className="text-[10px] text-black/50 mt-1">E-mails digitados aqui receberão a campanha independentemente da lista de clientes.</p>
+                                </div>
+
                                 <div className="flex justify-between items-center mb-4">
                                     <label className="text-[10px] uppercase font-bold tracking-widest text-black/50">
-                                        Destinatários ({selectedClientes.length} de {clientes.length})
+                                        Destinatários Registrados ({selectedClientes.length} de {clientes.length})
                                     </label>
                                     <button type="button" onClick={selectAllClientes}
                                         className="text-[10px] uppercase font-bold tracking-widest underline underline-offset-4 hover:opacity-60 transition-opacity">
