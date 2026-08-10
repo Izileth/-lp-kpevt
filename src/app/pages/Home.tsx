@@ -93,26 +93,7 @@ export default function Home({
             style={{ fontFamily: "'Archivo Black', 'Inter', Helvetica, Arial, sans-serif" }}
         >
             <div className="mx-auto flex min-h-screen w-full max-w-[1400px] flex-col px-5 py-6 sm:px-10 sm:py-8 lg:px-16">
-                {/* ---------- HEADER ---------- */}
-                <header className="grid grid-cols-2 items-start gap-y-2 text-[10px] font-medium uppercase tracking-[0.18em] sm:grid-cols-3 sm:text-[11px]">
-                    <div className="order-1">{name}</div>
-
-                    <div className="order-3 col-span-2 leading-[1.4] sm:order-2 sm:col-span-1 sm:text-center">
-                        <a href="#reach-out" className="block hover:opacity-60 transition-opacity">
-                            Reach Out
-                        </a>
-                        <a
-                            href={`https://${domain}`}
-                            className="block hover:opacity-60 transition-opacity"
-                        >
-                            {domain}
-                        </a>
-                    </div>
-
-                    <div className="order-2 text-right sm:order-3">
-                        NYC&nbsp;[&nbsp;{time || "—:— --"}&nbsp;]
-                    </div>
-                </header>
+                {/* ---------- HEADER GLOBAL SUBSTITUIU O LOCAL ---------- */}
 
                 {/* ---------- HERO ---------- */}
                 <div className="flex flex-1 items-center py-16 sm:py-24 lg:py-28">
@@ -199,13 +180,7 @@ export default function Home({
                     </div>
                 </div>
 
-                {/* ---------- FOOTER ---------- */}
-                <footer className="mt-auto flex items-center justify-between border-t border-black/10 pt-5 text-[9px] font-medium uppercase tracking-[0.18em] sm:text-[10px]">
-                    <div>
-                        {name} {year}
-                    </div>
-                    <div>All Rights Reserved</div>
-                </footer>
+                {/* ---------- FOOTER GLOBAL SUBSTITUIU O LOCAL ---------- */}
             </div>
         </section>
     );

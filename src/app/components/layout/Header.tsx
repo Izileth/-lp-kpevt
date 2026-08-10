@@ -1,67 +1,15 @@
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import { openWhatsApp } from '../../lib/whatsapp';
-import { useScrollVisibility } from '../../hooks/useScrollVisibility';
 import { motion, AnimatePresence } from 'framer-motion';
-import type { Variants } from 'framer-motion';
 import { navLinks } from '../../types/links';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+
 export const Header: React.FC = () => {
     const [menuOpen, setMenuOpen] = useState(false);
-    const isScrolled = useScrollVisibility(50);
     const navigate = useNavigate();
+    const location = useLocation();
 
-    const handleWhatsAppClick = (eventName: string) => {
-        openWhatsApp(undefined, eventName);
-    };
-
-    const headerClasses = `
-        fixed top-0 left-0 right-0 z-50 transition-all duration-300
-        ${isScrolled || menuOpen ? 'bg-black/95 backdrop-blur-lg border-b border-white/10' : 'bg-transparent border-b border-transparent'}
-    `;
-
-    const sidebarVariants: Variants = {
-        hidden: { 
-            clipPath: 'circle(0% at calc(100% - 56px) 28px)',
-            transition: { 
-                duration: 0.5,
-                ease: [0.32, 0.72, 0, 1]
-            }
-        },
-        visible: {
-            clipPath: 'circle(150% at calc(100% - 56px) 28px)',
-            transition: {
-                duration: 0.6,
-                ease: [0.32, 0.72, 0, 1],
-            },
-        },
-    };
-
-    const contentVariants: Variants = {
-        hidden: { 
-            opacity: 0,
-        },
-        visible: {
-            opacity: 1,
-            transition: {
-                delay: 0.3,
-                duration: 0.4,
-            }
-        },
-        exit: {
-            opacity: 0,
-            transition: {
-                duration: 0.2,
-            }
-        }
-    };
-
-    const navLinkVariants = {
-        hidden: { opacity: 0, x: -20 },
-        visible: { opacity: 1, x: 0 },
-    };
-
-    // Previne scroll quando menu está aberto
+    // Prevent scroll when menu is open
     React.useEffect(() => {
         if (menuOpen) {
             document.body.style.overflow = 'hidden';
@@ -75,198 +23,80 @@ export const Header: React.FC = () => {
 
     return (
         <>
-            <header className={headerClasses}>
-                <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
-                    <div className="text-2xl font-bold">
-                        K Projeções <span className="text-white/60">& Eventos</span>
+            <header className="w-full bg-white text-black border-b border-black/10 selection:bg-black selection:text-white" style={{ fontFamily: "'Archivo Black', 'Inter', Helvetica, Arial, sans-serif" }}>
+                <nav className="mx-auto flex w-full max-w-[1400px] items-start justify-between px-5 py-6 sm:px-10 sm:py-8 lg:px-16 text-[10px] font-medium uppercase tracking-[0.18em] sm:text-[11px]">
+                    
+                    {/* LOGO */}
+                    <div className="order-1 flex-1">
+                        <button onClick={() => navigate('/')} className="hover:opacity-60 transition-opacity">
+                            K PROJEÇÕES
+                        </button>
                     </div>
 
-                    {/* Desktop Menu */}
-                    <div className="hidden md:flex items-center space-x-8">
+                    {/* DESKTOP LINKS */}
+                    <div className="hidden sm:flex order-2 flex-1 justify-center gap-8">
                         {navLinks.map(link => (
-                            <button key={link.path} onClick={() => navigate(link.path)} className="hover:text-white/70 transition bg-transparent border-none text-white cursor-pointer text-base">
+                            <button 
+                                key={link.path} 
+                                onClick={() => navigate(link.path)} 
+                                className={`hover:opacity-60 transition-opacity ${location.pathname === link.path ? 'opacity-50' : ''}`}
+                            >
                                 {link.label}
                             </button>
                         ))}
                     </div>
 
-                    {/* Desktop CTA */}
-                    <div className="hidden md:block">
-                        <button
-                            onClick={() => handleWhatsAppClick('header_cta')}
-                            className="px-6 py-2 bg-white text-black hover:bg-white/90 transition rounded font-semibold"
+                    {/* RIGHT CTA / MOBILE TOGGLE */}
+                    <div className="order-3 flex-1 text-right flex justify-end items-center gap-4">
+                        <button 
+                            className="hidden sm:inline-block bg-black text-white px-4 py-2 hover:opacity-80 transition-opacity"
+                            onClick={() => navigate('/contact')}
                         >
-                            Solicitar Orçamento
+                            ORÇAMENTO
+                        </button>
+                        <button
+                            className="sm:hidden hover:opacity-60 transition-opacity"
+                            onClick={() => setMenuOpen(!menuOpen)}
+                        >
+                            {menuOpen ? <X size={24} /> : <Menu size={24} />}
                         </button>
                     </div>
-
-                    {/* Mobile Menu Button */}
-                    <button
-                        className="md:hidden relative  w-10 h-10 flex items-center justify-center"
-                        onClick={() => setMenuOpen(!menuOpen)}
-                        aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
-                    >
-                        <AnimatePresence mode="wait">
-                            {menuOpen ? (
-                                <motion.div
-                                    key="close"
-                                    initial={{ rotate: -90, opacity: 0 }}
-                                    animate={{ rotate: 0, opacity: 1 }}
-                                    exit={{ rotate: 90, opacity: 0 }}
-                                    transition={{ duration: 0.2 }}
-                                >
-                                    <X size={28} />
-                                </motion.div>
-                            ) : (
-                                <motion.div
-                                    key="menu"
-                                    initial={{ rotate: 90, opacity: 0 }}
-                                    animate={{ rotate: 0, opacity: 1 }}
-                                    exit={{ rotate: -90, opacity: 0 }}
-                                    transition={{ duration: 0.2 }}
-                                >
-                                    <Menu size={28} />
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-                    </button>
                 </nav>
             </header>
 
-            {/* Mobile Menu Fullscreen */}
+            {/* MOBILE MENU */}
             <AnimatePresence>
                 {menuOpen && (
                     <motion.div
-                        variants={sidebarVariants}
-                        initial="hidden"
-                        animate="visible"
-                        exit="hidden"
-                        className="fixed inset-0 bg-black z-50 md:hidden"
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        className="fixed inset-0 top-[80px] bg-white z-40 sm:hidden flex flex-col px-5 py-10"
+                        style={{ fontFamily: "'Archivo Black', 'Inter', Helvetica, Arial, sans-serif" }}
                     >
-                        {/* Header com Logo e Botão Fechar */}
-                        <div className="absolute top-0 left-0 right-0 bg-transparent">
-                            <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-                                <motion.div 
-                                    className="text-2xl font-bold"
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: 0.4, duration: 0.3 }}
-                                >
-                                    K Projeções <span className="text-white/60">& Eventos</span>
-                                </motion.div>
-
-                                {/* Botão Fechar na mesma posição */}
+                        <div className="flex flex-col gap-8 text-[12vw] font-black uppercase leading-[0.9] tracking-tight">
+                            {navLinks.map(link => (
                                 <button
-                                    className="w-10 h-10 flex items-center justify-center"
-                                    onClick={() => setMenuOpen(false)}
-                                    aria-label="Fechar menu"
-                                >
-                                    <motion.div
-                                        initial={{ rotate: -90, opacity: 0 }}
-                                        animate={{ rotate: 0, opacity: 1 }}
-                                        transition={{ delay: 0.4, duration: 0.3 }}
-                                    >
-                                        <X size={28} />
-                                    </motion.div>
-                                </button>
-                            </div>
-                        </div>
-
-                        {/* Conteúdo do Menu */}
-                        <motion.div
-                            variants={contentVariants}
-                            initial="hidden"
-                            animate="visible"
-                            exit="exit"
-                            className="h-full flex flex-col justify-center px-8"
-                        >
-                            {/* Navegação Principal */}
-                            <motion.nav
-                                variants={{
-                                    visible: { 
-                                        transition: { 
-                                            staggerChildren: 0.08,
-                                            delayChildren: 0.5
-                                        } 
-                                    }
-                                }}
-                                initial="hidden"
-                                animate="visible"
-                                className="mb-16"
-                            >
-                                <ul className="space-y-2">
-                                    {navLinks.map((link, index) => (
-                                        <motion.li 
-                                            key={link.path} 
-                                            variants={navLinkVariants}
-                                            className="overflow-hidden"
-                                        >
-                                            <button
-                                                onClick={() => {
-                                                    navigate(link.path);
-                                                    setMenuOpen(false);
-                                                }}
-                                                className="block text-4xl md:text-5xl font-bold hover:text-white/70 transition-colors py-3 group bg-transparent border-none text-white cursor-pointer w-full text-left"
-                                            >
-                                                <span className="text-white/30 text-base font-normal mr-4 inline-block w-8">
-                                                    0{index + 1}
-                                                </span>
-                                                <span className="inline-block group-hover:translate-x-2 transition-transform">
-                                                    {link.label}
-                                                </span>
-                                            </button>
-                                        </motion.li>
-                                    ))}
-                                </ul>
-                            </motion.nav>
-
-                            {/* CTA Button */}
-                            <motion.div
-                                variants={navLinkVariants}
-                                className="mb-12"
-                            >
-                                <button
+                                    key={link.path}
                                     onClick={() => {
+                                        navigate(link.path);
                                         setMenuOpen(false);
-                                        handleWhatsAppClick('mobile_menu_cta');
                                     }}
-                                    className="w-full max-w-md px-8 py-5 bg-white text-black hover:bg-white/90 transition-all duration-300 rounded-xl font-semibold text-xl"
+                                    className="text-left hover:opacity-60 transition-opacity border-b border-black/10 pb-4"
                                 >
-                                    Solicitar Orçamento
+                                    {link.label}
                                 </button>
-                            </motion.div>
-
-                            {/* Info de Contato */}
-                            <motion.div
-                                variants={navLinkVariants}
-                                className="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-8 border-t border-white/10 max-w-4xl"
+                            ))}
+                            <button
+                                onClick={() => {
+                                    navigate('/contact');
+                                    setMenuOpen(false);
+                                }}
+                                className="text-left hover:opacity-60 transition-opacity pb-4 text-black/50"
                             >
-                                <div>
-                                    <p className="text-white/40 text-xs uppercase tracking-wider mb-2">Telefone</p>
-                                    <a href="tel:+5591981125595" className="text-white/90 hover:text-white transition text-lg">
-                                        (91) 998112-5595
-                                    </a>
-                                </div>
-                                <div>
-                                    <p className="text-white/40 text-xs uppercase tracking-wider mb-2">E-mail</p>
-                                    <a href="mailto:kprogecoes.oficial@gmail.com" className="text-white/90 hover:text-white transition text-lg break-all">
-                                        kprogecoes.oficial@gmail.com
-                                    </a>
-                                </div>
-                                <div>
-                                    <p className="text-white/40 text-xs uppercase tracking-wider mb-2">Localização</p>
-                                    <p className="text-white/70 text-lg">Belém, PA</p>
-                                </div>
-                            </motion.div>
-                        </motion.div>
-
-                        {/* Decorative Elements */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 0.1 }}
-                            transition={{ delay: 0.6 }}
-                            className="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full blur-[150px] pointer-events-none"
-                        />
+                                ORÇAMENTO
+                            </button>
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>
