@@ -40,8 +40,6 @@ export default function Admin() {
     const [templateName, setTemplateName] = useState("");
     const [templateSubject, setTemplateSubject] = useState("");
     const [templateHtml, setTemplateHtml] = useState("");
-    const [ setTemplateText] = useState("");
-
     // Campaign Form
     const [campaignName, setCampaignName] = useState("");
     const [selectedTemplate, setSelectedTemplate] = useState("");
@@ -58,6 +56,9 @@ export default function Admin() {
         fetchData();
     }, []);
 
+    
+
+    
     async function fetchData() {
         const { data: tData } = await supabase
             .from("email_templates")
@@ -115,7 +116,7 @@ export default function Admin() {
             setStatusMsg(`Erro: ${error.message}`);
         } else {
             setStatusMsg("Template criado com sucesso!");
-            setTemplateName(""); setTemplateSubject(""); setTemplateHtml(""); setTemplateText("");
+            setTemplateName(""); setTemplateSubject(""); setTemplateHtml("");
             fetchData();
         }
     };
@@ -190,7 +191,7 @@ export default function Admin() {
         customEmails.forEach(emailCustomizado => {
             sends.push({
                 campaign_id: newCampaign.id,
-                cliente_id: null as any, // Veja a nota acima
+                cliente_id: null as unknown as string, // Veja a nota acima
                 email: emailCustomizado,
                 status: "pendente" as const,
             });
