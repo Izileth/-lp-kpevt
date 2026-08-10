@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
 import { useAuth } from "../contexts/AuthContext";
+import { DateTimePicker } from "../components/ui/DateTimePicker";
 
 type Template = { id: string; nome: string; assunto: string };
 type Cliente = { id: string; nome: string; email: string; aceita_marketing: boolean };
@@ -299,11 +300,11 @@ export default function Admin() {
                                     className="w-full bg-transparent border-b border-black/20 px-0 py-3 focus:outline-none focus:border-black transition text-sm" />
                             </div>
 
-                            <div>
-                                <label className="block text-[10px] uppercase font-bold tracking-widest text-black/50 mb-1">Agendada Para (Opcional)</label>
-                                <input type="datetime-local" value={scheduledFor} onChange={e => setScheduledFor(e.target.value)}
-                                    className="w-full bg-transparent border-b border-black/20 px-0 py-3 focus:outline-none focus:border-black transition text-sm" />
-                            </div>
+                            <DateTimePicker
+                                label="Agendada Para (Opcional)"
+                                value={scheduledFor}
+                                onChange={setScheduledFor}
+                            />
 
                             {/* SELEÇÃO DE DESTINATÁRIOS — email_sends */}
                             <div className="border-t border-black/10 pt-6">
