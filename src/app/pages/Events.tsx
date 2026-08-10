@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 const EVENTS_DATA = [
     { label: "FORMATURAS", desc: "Estrutura completa de som e luz para celebrar essa conquista com o impacto que ela merece." },

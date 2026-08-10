@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+
 import { NewsletterForm } from "../components/ui/NewsletterForm";
 
 /**
@@ -56,37 +56,12 @@ const DEFAULT_LINKS: ReachOutLink[] = [
     { label: "ARE.NA", href: "https://are.na" },
 ];
 
-function useNYCClock() {
-    const [time, setTime] = useState("");
-
-    useEffect(() => {
-        const formatter = new Intl.DateTimeFormat("en-US", {
-            timeZone: "America/New_York",
-            hour: "numeric",
-            minute: "2-digit",
-            hour12: true,
-        });
-
-        const update = () => setTime(formatter.format(new Date()));
-        update();
-        const id = setInterval(update, 1000 * 15);
-        return () => clearInterval(id);
-    }, []);
-
-    return time;
-}
-
 export default function Home({
-    name = "Katie Hunter",
     role = ["KATIE", "HUNTER", "DIGITAL", "DESIGNER"],
     aboutText = "Katie crafts digital experiences that blend creativity with precision, transforming ideas into captivating designs that resonate seamlessly with audiences.",
     projects = DEFAULT_PROJECTS,
     reachOutLinks = DEFAULT_LINKS,
-    year = "'24",
-    domain = "katiehunter.com",
 }: KatieHunterHeroProps) {
-    const time = useNYCClock();
-
     return (
         <section
             className="w-full bg-white text-black selection:bg-black selection:text-white"
