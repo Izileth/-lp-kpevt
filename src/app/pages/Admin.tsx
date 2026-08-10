@@ -210,18 +210,32 @@ export default function Admin() {
     };
 
     const handleSendCampaign = async (id: string) => {
-        setStatusMsg("Agendando disparo...");
-        const { error } = await supabase
+        setStatusMsg("Agendando e iniciando disparo...");
+        
+        // 1) Marca a campanha como 'agendada' e seta a data para o momento atual
+        const { error: updateErr } = await supabase
             .from("email_campaigns")
-            .update({ status: "agendada" })
+            .update({ 
+                status: "agendada",
+                agendada_para: new Date().toISOString() 
+            })
             .eq("id", id);
 
-        if (error) {
-            setStatusMsg(`Erro: ${error.message}`);
-        } else {
-            setStatusMsg("Campanha agendada para disparo (Edge Function assumirá)!");
-            fetchData();
+        if (updateErr) {
+            setStatusMsg(`Erro ao agendar: ${updateErr.message}`);
+            return;
         }
+
+        // 2) Aciona a função RPC no banco para processar a fila
+        const { error: rpcErr } = await supabase.rpc("disparar_campanhas_agendadas");
+
+        if (rpcErr) {
+            setStatusMsg(`Erro ao acionar o disparo: ${rpcErr.message}`);
+        } else {
+            setStatusMsg("Campanha enviada para processamento com sucesso!");
+        }
+        
+        fetchData();
     };
 
     // ── HELPERS ────────────────────────────────────────────
