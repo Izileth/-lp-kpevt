@@ -5,11 +5,13 @@ import Events from "./pages/Events";
 import Contact from "./pages/Contact";
 import Admin from "./pages/Admin";
 import Login from "./pages/Login";
+import NotFound from "./pages/NotFound";
 import { ProtectedRoute } from "./components/ui/ProtectedRoute";
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <App />,
+        errorElement: <NotFound />,
         children: [
             {
                 path: "/",
@@ -34,6 +36,10 @@ export const router = createBrowserRouter([
                         <Admin />
                     </ProtectedRoute>
                 ),
+            },
+            {
+                path: "*",
+                element: <NotFound />,
             },
         ]
     },
