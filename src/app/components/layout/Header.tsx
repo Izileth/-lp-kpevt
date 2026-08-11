@@ -23,7 +23,7 @@ export const Header: React.FC = () => {
 
     return (
         <>
-            <header className="w-full bg-white text-black border-b border-black/10 selection:bg-black selection:text-white" style={{ fontFamily: "'Archivo Black', 'Inter', Helvetica, Arial, sans-serif" }}>
+            <header className="sticky top-0 z-50 w-full bg-white text-black border-b border-black/10 selection:bg-black selection:text-white" style={{ fontFamily: "'Archivo Black', 'Inter', Helvetica, Arial, sans-serif" }}>
                 <nav className="mx-auto flex w-full max-w-[1400px] items-start justify-between px-5 py-6 sm:px-10 sm:py-8 lg:px-16 text-[10px] font-medium uppercase tracking-[0.18em] sm:text-[11px]">
                     
                     {/* LOGO */}
@@ -68,13 +68,14 @@ export const Header: React.FC = () => {
             <AnimatePresence>
                 {menuOpen && (
                     <motion.div
-                        initial={{ opacity: 0, y: -20 }}
+                        initial={{ opacity: 0, y: '-100%' }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        className="fixed inset-0 top-[80px] bg-white z-40 sm:hidden flex flex-col px-5 py-10"
+                        exit={{ opacity: 0, y: '-100%' }}
+                        transition={{ duration: 0.3, ease: 'easeInOut' }}
+                        className="fixed inset-0 z-40 bg-white sm:hidden flex flex-col px-5 pt-28 pb-10 overflow-y-auto"
                         style={{ fontFamily: "'Archivo Black', 'Inter', Helvetica, Arial, sans-serif" }}
                     >
-                        <div className="flex flex-col gap-8 text-[12vw] font-black uppercase leading-[0.9] tracking-tight">
+                        <div className="flex flex-col gap-6 text-[9vw] font-black uppercase leading-[1.1] tracking-tight">
                             {navLinks.map(link => (
                                 <button
                                     key={link.path}
@@ -82,7 +83,7 @@ export const Header: React.FC = () => {
                                         navigate(link.path);
                                         setMenuOpen(false);
                                     }}
-                                    className="text-left hover:opacity-60 transition-opacity border-b border-black/10 pb-4"
+                                    className={`text-left hover:opacity-60 transition-opacity border-b border-black/10 pb-4 ${location.pathname === link.path ? 'opacity-50' : ''}`}
                                 >
                                     {link.label}
                                 </button>
@@ -92,7 +93,7 @@ export const Header: React.FC = () => {
                                     navigate('/contact');
                                     setMenuOpen(false);
                                 }}
-                                className="text-left hover:opacity-60 transition-opacity pb-4 text-black/50"
+                                className={`text-left hover:opacity-60 transition-opacity pb-4 text-black/50 ${location.pathname === '/contact' ? 'opacity-100 text-black' : ''}`}
                             >
                                 ORÇAMENTO
                             </button>

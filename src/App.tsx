@@ -6,7 +6,7 @@ import { Footer } from './app/components/layout/Footer';
 function App() {
   useSmoothScroll();
   const location = useLocation();
-  const hideLayout = location.pathname === '/admin' || location.pathname === '/login';
+  const hideLayout =  location.pathname === '/login';
 
   return (
     <div className="min-h-screen flex flex-col">
