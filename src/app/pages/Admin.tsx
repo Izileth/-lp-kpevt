@@ -258,9 +258,9 @@ export default function Admin() {
 
                 {/* STATUS */}
                 {statusMsg && (
-                    <div className="mb-6 bg-black text-white px-4 py-3 text-[11px] font-bold uppercase tracking-widest flex justify-between items-center">
+                    <div role="status" aria-live="polite" className="mb-6 bg-black text-white px-4 py-3 text-[11px] font-bold uppercase tracking-widest flex justify-between items-center">
                         <span>{statusMsg}</span>
-                        <button onClick={() => setStatusMsg("")} className="hover:opacity-60 ml-4">✕</button>
+                        <button onClick={() => setStatusMsg("")} aria-label="Fechar mensagem de status" className="hover:opacity-60 ml-4 focus:ring-2 focus:ring-white focus:outline-none">✕</button>
                     </div>
                 )}
 
@@ -277,16 +277,31 @@ export default function Admin() {
                         <h2 className="text-[8vw] sm:text-[4vw] font-black uppercase leading-[0.9] tracking-tight">TEMPLATES</h2>
 
                         <form onSubmit={handleCreateTemplate} className="flex flex-col gap-4 max-w-2xl">
-                            <input type="text" placeholder="Nome do Template" required value={templateName} onChange={e => setTemplateName(e.target.value)}
-                                className="w-full bg-transparent border-b border-black/20 px-0 py-3 focus:outline-none focus:border-black transition text-sm" />
-                            <input type="text" placeholder="Assunto do E-mail" required value={templateSubject} onChange={e => setTemplateSubject(e.target.value)}
-                                className="w-full bg-transparent border-b border-black/20 px-0 py-3 focus:outline-none focus:border-black transition text-sm" />
                             <div>
-                                <label className="block text-[10px] uppercase font-bold tracking-widest text-black/50 mb-1">Mensagem do E-mail (Markdown suportado: # Título, **Negrito**)</label>
-                                <textarea placeholder="# Olá {{nome}}&#10;&#10;Esta é uma **mensagem** formatada..." required rows={6} value={templateHtml} onChange={e => setTemplateHtml(e.target.value)}
+                                <label htmlFor="templateName" className="sr-only">Nome do Template</label>
+                                <input id="templateName" type="text" placeholder="Nome do Template" required value={templateName} onChange={e => setTemplateName(e.target.value)}
+                                    className="w-full bg-transparent border-b border-black/20 px-0 py-3 focus:outline-none focus:border-black transition text-sm" />
+                            </div>
+                            <div>
+                                <label htmlFor="templateSubject" className="sr-only">Assunto do E-mail</label>
+                                <input id="templateSubject" type="text" placeholder="Assunto do E-mail" required value={templateSubject} onChange={e => setTemplateSubject(e.target.value)}
+                                    className="w-full bg-transparent border-b border-black/20 px-0 py-3 focus:outline-none focus:border-black transition text-sm" />
+                            </div>
+                            <div>
+                                <label htmlFor="templateHtml" className="block text-[10px] uppercase font-bold tracking-widest text-black/50 mb-1">Mensagem do E-mail (Markdown suportado: # Título, **Negrito**)</label>
+                                <textarea id="templateHtml" placeholder="# Olá {{nome}}&#10;&#10;Esta é uma **mensagem** formatada..." required rows={6} value={templateHtml} onChange={e => setTemplateHtml(e.target.value)}
                                     className="w-full bg-transparent border border-black/10 p-3 focus:outline-none focus:border-black transition text-sm resize-none font-mono" />
                             </div>
-                            <button type="submit" className="mt-2 self-start bg-black text-white px-8 py-4 uppercase text-[10px] font-bold tracking-[0.18em] hover:opacity-80 transition-opacity">
+                            
+                            {/* PREVIEW DO EMAIL */}
+                            <div className="mt-2" aria-live="polite">
+                                <label className="block text-[10px] uppercase font-bold tracking-widest text-black/50 mb-1">Pré-visualização do E-mail</label>
+                                <div className="w-full border border-black/10 p-4 min-h-[100px] bg-neutral-50 text-sm"
+                                     dangerouslySetInnerHTML={{ __html: templateHtml ? parseMarkdown(templateHtml) : "<em class='text-black/40'>A pré-visualização aparecerá aqui...</em>" }}
+                                />
+                            </div>
+
+                            <button type="submit" className="mt-2 self-start bg-black text-white px-8 py-4 uppercase text-[10px] font-bold tracking-[0.18em] hover:opacity-80 focus:ring-2 focus:ring-black focus:ring-offset-2 focus:outline-none transition-opacity">
                                 CRIAR TEMPLATE
                             </button>
                         </form>
@@ -312,12 +327,15 @@ export default function Admin() {
                         <h2 className="text-[8vw] sm:text-[4vw] font-black uppercase leading-[0.9] tracking-tight">CAMPANHAS</h2>
 
                         <form onSubmit={handleCreateCampaign} className="flex flex-col gap-6 max-w-2xl">
-                            <input type="text" placeholder="Nome da Campanha" required value={campaignName} onChange={e => setCampaignName(e.target.value)}
-                                className="w-full bg-transparent border-b border-black/20 px-0 py-3 focus:outline-none focus:border-black transition text-sm" />
+                            <div>
+                                <label htmlFor="campaignName" className="sr-only">Nome da Campanha</label>
+                                <input id="campaignName" type="text" placeholder="Nome da Campanha" required value={campaignName} onChange={e => setCampaignName(e.target.value)}
+                                    className="w-full bg-transparent border-b border-black/20 px-0 py-3 focus:outline-none focus:border-black transition text-sm" />
+                            </div>
 
                             <div>
-                                <label className="block text-[10px] uppercase font-bold tracking-widest text-black/50 mb-1">Template</label>
-                                <select required value={selectedTemplate} onChange={e => setSelectedTemplate(e.target.value)}
+                                <label htmlFor="selectedTemplate" className="block text-[10px] uppercase font-bold tracking-widest text-black/50 mb-1">Template</label>
+                                <select id="selectedTemplate" required value={selectedTemplate} onChange={e => setSelectedTemplate(e.target.value)}
                                     className="w-full bg-transparent border-b border-black/20 px-0 py-3 focus:outline-none focus:border-black transition text-sm appearance-none">
                                     <option value="" disabled>Selecione um Template</option>
                                     {templates.map(t => (
@@ -328,13 +346,13 @@ export default function Admin() {
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-[10px] uppercase font-bold tracking-widest text-black/50 mb-1">Nome do Remetente</label>
-                                    <input type="text" placeholder="Nome do Remetente" required value={senderName} onChange={e => setSenderName(e.target.value)}
+                                    <label htmlFor="senderName" className="block text-[10px] uppercase font-bold tracking-widest text-black/50 mb-1">Nome do Remetente</label>
+                                    <input id="senderName" type="text" placeholder="Nome do Remetente" required value={senderName} onChange={e => setSenderName(e.target.value)}
                                         className="w-full bg-transparent border-b border-black/20 px-0 py-3 focus:outline-none focus:border-black transition text-sm" />
                                 </div>
                                 <div>
-                                    <label className="block text-[10px] uppercase font-bold tracking-widest text-black/50 mb-1">E-mail Remetente</label>
-                                    <input type="email" disabled value={senderEmail}
+                                    <label htmlFor="senderEmail" className="block text-[10px] uppercase font-bold tracking-widest text-black/50 mb-1">E-mail Remetente</label>
+                                    <input id="senderEmail" type="email" disabled value={senderEmail}
                                         className="w-full bg-transparent border-b border-black/20 px-0 py-3 text-sm text-black/50 cursor-not-allowed" />
                                 </div>
                             </div>
@@ -349,10 +367,10 @@ export default function Admin() {
                             <div className="border-t border-black/10 pt-6">
 
                                 <div className="mb-8">
-                                    <label className="block text-[10px] uppercase font-bold tracking-widest text-black/50 mb-1">
+                                    <label htmlFor="customRecipients" className="block text-[10px] uppercase font-bold tracking-widest text-black/50 mb-1">
                                         E-mails Personalizados (Separados por vírgula)
                                     </label>
-                                    <input type="text" placeholder="exemplo@gmail.com, outro@hotmail.com" value={customRecipients} onChange={e => setCustomRecipients(e.target.value)}
+                                    <input id="customRecipients" type="text" placeholder="exemplo@gmail.com, outro@hotmail.com" value={customRecipients} onChange={e => setCustomRecipients(e.target.value)}
                                         className="w-full bg-transparent border-b border-black/20 px-0 py-3 focus:outline-none focus:border-black transition text-sm" />
                                     <p className="text-[10px] text-black/50 mt-1">E-mails digitados aqui receberão a campanha independentemente da lista de clientes.</p>
                                 </div>
@@ -372,12 +390,14 @@ export default function Admin() {
                                 ) : (
                                     <div className="max-h-60 overflow-y-auto border border-black/10 divide-y divide-black/5">
                                         {clientes.map(cl => (
-                                            <label key={cl.id} className="flex items-center gap-3 px-4 py-3 hover:bg-black/[0.02] cursor-pointer transition">
+                                            <label key={cl.id} htmlFor={`cliente-${cl.id}`} className="flex items-center gap-3 px-4 py-3 hover:bg-black/[0.02] cursor-pointer transition">
                                                 <input
+                                                    id={`cliente-${cl.id}`}
                                                     type="checkbox"
                                                     checked={selectedClientes.includes(cl.id)}
                                                     onChange={() => toggleCliente(cl.id)}
-                                                    className="accent-black w-4 h-4"
+                                                    className="accent-black w-4 h-4 focus:ring-2 focus:ring-black focus:outline-none"
+                                                    aria-label={`Selecionar cliente ${cl.nome}`}
                                                 />
                                                 <div className="flex flex-col">
                                                     <span className="text-sm font-medium">{cl.nome}</span>
