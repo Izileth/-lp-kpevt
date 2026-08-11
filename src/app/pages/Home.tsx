@@ -34,7 +34,7 @@ type ReachOutLink = {
     href: string;
 };
 
-interface KatieHunterHeroProps {
+interface HomeProps {
     name?: string;
     role?: string[];
     aboutText?: string;
@@ -45,23 +45,23 @@ interface KatieHunterHeroProps {
 }
 
 const DEFAULT_PROJECTS: Project[] = [
-    { label: "THE COOL EFFECT" },
-    { label: "FRESH OLIVES" },
-    { label: "NETWORKING" },
+    { label: "CASAMENTOS" },
+    { label: "SHOWS" },
+    { label: "FORMATURAS" },
 ];
 
 const DEFAULT_LINKS: ReachOutLink[] = [
-    { label: "EMAIL", href: "mailto:hello@katiehunter.com" },
-    { label: "BEHANCE", href: "https://behance.net" },
-    { label: "ARE.NA", href: "https://are.na" },
+    { label: "WHATSAPP", href: "https://wa.me/550000000000" },
+    { label: "INSTAGRAM", href: "https://instagram.com" },
+    { label: "EMAIL", href: "mailto:contato@kprojecoes.com" },
 ];
 
 export default function Home({
-    role = ["KATIE", "HUNTER", "DIGITAL", "DESIGNER"],
-    aboutText = "Katie crafts digital experiences that blend creativity with precision, transforming ideas into captivating designs that resonate seamlessly with audiences.",
+    role = ["K PROJEÇÕES", "EVENTOS", "LUZ", "& SOM"],
+    aboutText = "A K Projeções transforma o seu evento em uma experiência inesquecível com estruturas de ponta, sonorização impecável e iluminação de tirar o fôlego.",
     projects = DEFAULT_PROJECTS,
     reachOutLinks = DEFAULT_LINKS,
-}: KatieHunterHeroProps) {
+}: HomeProps) {
     return (
         <section
             className="w-full bg-white text-black selection:bg-black selection:text-white"
