@@ -97,19 +97,6 @@ export const Header: React.FC = () => {
                             >
                                 ORÇAMENTO
                             </button>
-                            <button
-                                onClick={() => navigate('/contact')}
-                                className="bg-black text-white px-6 py-4 uppercase text-[11px] font-bold tracking-[0.18em] hover:opacity-80 transition-opacity"
-                            >
-                                CONTATO
-                            </button>
-                            <button
-                                onClick={() => navigate('/')}
-                                className="bg-black text-white px-6 py-4 uppercase text-[11px] font-bold tracking-[0.18em] hover:opacity-80 transition-opacity"
-                            >
-                                VOLTAR AO INÍCIO
-                            </button>
-
                         </div>
                     </motion.div>
                 )}

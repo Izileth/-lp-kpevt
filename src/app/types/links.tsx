@@ -1,6 +1,6 @@
 export const navLinks = [
     { path: '/', label: 'HOME' },
-    { path: '/events', label: 'MAIS' },
-    { path: '/admin', label: 'ADM' },
+    { path: '/events', label: 'EVENTOS' },
+    { path: '/admin', label: 'ADMIN' },
+    { path: '/login', label: 'LOGIN' },
 ];
-
