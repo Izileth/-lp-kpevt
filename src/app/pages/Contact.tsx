@@ -9,8 +9,8 @@ const Contact: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-       // const text = `*Novo Orçamento - K Projeções*\n\n*Nome:* ${name}\n*E-mail:* ${email}\n*Telefone:* ${phone}\n*Mensagem:* ${message}`;
-     //   openWhatsApp(text, 'contact_form_submit');
+        // const text = `*Novo Orçamento - K Projeções*\n\n*Nome:* ${name}\n*E-mail:* ${email}\n*Telefone:* ${phone}\n*Mensagem:* ${message}`;
+        //   openWhatsApp(text, 'contact_form_submit');
     };
 
     return (

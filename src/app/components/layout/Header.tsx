@@ -25,7 +25,7 @@ export const Header: React.FC = () => {
         <>
             <header className="sticky top-0 z-50 w-full bg-white text-black border-b border-black/10 selection:bg-black selection:text-white" style={{ fontFamily: "'Archivo Black', 'Inter', Helvetica, Arial, sans-serif" }}>
                 <nav className="mx-auto flex w-full max-w-[1400px] items-start justify-between px-5 py-6 sm:px-10 sm:py-8 lg:px-16 text-[10px] font-medium uppercase tracking-[0.18em] sm:text-[11px]">
-                    
+
                     {/* LOGO */}
                     <div className="order-1 flex-1">
                         <button onClick={() => navigate('/')} className="hover:opacity-60 transition-opacity">
@@ -36,9 +36,9 @@ export const Header: React.FC = () => {
                     {/* DESKTOP LINKS */}
                     <div className="hidden sm:flex order-2 flex-1 justify-center gap-8">
                         {navLinks.map(link => (
-                            <button 
-                                key={link.path} 
-                                onClick={() => navigate(link.path)} 
+                            <button
+                                key={link.path}
+                                onClick={() => navigate(link.path)}
                                 className={`hover:opacity-60 transition-opacity ${location.pathname === link.path ? 'opacity-50' : ''}`}
                             >
                                 {link.label}
@@ -48,7 +48,7 @@ export const Header: React.FC = () => {
 
                     {/* RIGHT CTA / MOBILE TOGGLE */}
                     <div className="order-3 flex-1 text-right flex justify-end items-center gap-4">
-                        <button 
+                        <button
                             className="hidden sm:inline-block bg-black text-white px-4 py-2 hover:opacity-80 transition-opacity"
                             onClick={() => navigate('/contact')}
                         >
@@ -97,6 +97,19 @@ export const Header: React.FC = () => {
                             >
                                 ORÇAMENTO
                             </button>
+                            <button
+                                onClick={() => navigate('/contact')}
+                                className="bg-black text-white px-6 py-4 uppercase text-[11px] font-bold tracking-[0.18em] hover:opacity-80 transition-opacity"
+                            >
+                                CONTATO
+                            </button>
+                            <button
+                                onClick={() => navigate('/')}
+                                className="bg-black text-white px-6 py-4 uppercase text-[11px] font-bold tracking-[0.18em] hover:opacity-80 transition-opacity"
+                            >
+                                VOLTAR AO INÍCIO
+                            </button>
+
                         </div>
                     </motion.div>
                 )}
